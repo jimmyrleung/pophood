@@ -1,0 +1,74 @@
+/* Design tokens from specs/v0.1.0/ui-proposal/ui-proposal.md (colour tokens); `--shadow` from the v0.1.1 UI proposal. `data-theme` is set before the first render. */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0a0f1a;
+  --surface: #0f1626;
+  --raised: #1a2540;
+  --selected: #14203a;
+  --inset: #0a0f1a;
+  --line: #1e2a40;
+  --hair: #18233a;
+  --strong: #2a3854;
+  --rule: #b4c3da;
+  --text: #e6edf7;
+  --sub: #b4c3da;
+  --muted: #8b9bb4;
+  --accent: #34d3c0;
+  --accent-fill: #34d3c0;
+  --on-accent: #04201c;
+  --s2: #ff9f43;
+  --s3: #c3a6ff;
+  --locked: #3a4a66;
+  --info-bg: #11233a;
+  --info-line: #22476b;
+  --info-text: #b4c3da;
+  --info-icon: #7cc4ff;
+  --info-fill: #7cc4ff;
+  --on-info: #061a2e;
+  --danger-line: #6b2e2e;
+  --danger-text: #ffb1a8;
+  --dashed: #2a3854;
+  --ok-icon: #34d3c0;
+  --shadow: rgba(0, 0, 0, 0.45);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f4f7fb;
+  --surface: #ffffff;
+  --raised: #e3ecf7;
+  --selected: #eef5fd;
+  --inset: #f4f7fb;
+  --line: #dce3ee;
+  --hair: #eaeff5;
+  --strong: #c3cedd;
+  --rule: #0e1626;
+  --text: #0e1626;
+  --sub: #33415a;
+  --muted: #4f5e75;
+  --accent: #0b8577;
+  --accent-fill: #0b8577;
+  --on-accent: #ffffff;
+  --s2: #c2570c;
+  --s3: #7a4fd6;
+  --locked: #c3cedd;
+  --info-bg: #eaf3ff;
+  --info-line: #b5d2f5;
+  --info-text: #33415a;
+  --info-icon: #1c5fa8;
+  --info-fill: #1c5fa8;
+  --on-info: #ffffff;
+  --danger-line: #e8b4b0;
+  --danger-text: #a3271f;
+  --dashed: #b4c1d3;
+  --ok-icon: #0b8577;
+  --shadow: rgba(14, 22, 38, 0.18);
+}
+
+/* Avoids a white flash before the theme attribute and the stylesheet apply. */
+@media (prefers-color-scheme: dark) {
+  html {
+    background: #0a0f1a;
+  }
+}

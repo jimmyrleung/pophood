@@ -1,0 +1,714 @@
+{
+  "seq": 100,
+  "t": 1761040900000,
+  "periodMs": 1000,
+  "elevated": true,
+  "memory": [
+    {
+      "locator": "DIMM 1",
+      "sizeGB": 16,
+      "type": "DDR5",
+      "configuredMTs": 6000
+    },
+    {
+      "locator": "DIMM 1",
+      "sizeGB": 16,
+      "type": "DDR5",
+      "configuredMTs": 6000
+    }
+  ],
+  "hardware": [
+    {
+      "id": "/motherboard",
+      "name": "Gigabyte B850 EAGLE WIFI6E",
+      "type": "Motherboard",
+      "parent": null
+    },
+    {
+      "id": "/lpc/it8696e/0",
+      "name": "ITE IT8696E",
+      "type": "SuperIO",
+      "parent": "/motherboard"
+    },
+    {
+      "id": "/amdcpu/0",
+      "name": "AMD Ryzen 9 9900X",
+      "type": "Cpu",
+      "parent": null
+    },
+    {
+      "id": "/vram",
+      "name": "Virtual Memory",
+      "type": "Memory",
+      "parent": null
+    },
+    {
+      "id": "/ram",
+      "name": "Total Memory",
+      "type": "Memory",
+      "parent": null
+    },
+    {
+      "id": "/memory/dimm/1",
+      "name": "Corsair - CMK32GX5M2B6000C38 (#1)",
+      "type": "Memory",
+      "parent": null
+    },
+    {
+      "id": "/memory/dimm/3",
+      "name": "Corsair - CMK32GX5M2B6000C38 (#3)",
+      "type": "Memory",
+      "parent": null
+    },
+    {
+      "id": "/gpu-amd/0",
+      "name": "AMD Radeon(TM) Graphics",
+      "type": "GpuAmd",
+      "parent": null
+    },
+    {
+      "id": "/gpu-nvidia/0",
+      "name": "NVIDIA GeForce RTX 5060 Ti",
+      "type": "GpuNvidia",
+      "parent": null
+    },
+    {
+      "id": "/nvme/0",
+      "name": "KINGSTON SNV3S1000G",
+      "type": "Storage",
+      "parent": null
+    }
+  ],
+  "sensors": [
+    {
+      "id": "/lpc/it8696e/0/control/0",
+      "hw": "/lpc/it8696e/0",
+      "name": "Fan #1",
+      "type": "Control",
+      "index": 0,
+      "value": null,
+      "key": "/lpc/it8696e/0/control/0|Fan #1"
+    },
+    {
+      "id": "/lpc/it8696e/0/control/1",
+      "hw": "/lpc/it8696e/0",
+      "name": "Fan #2",
+      "type": "Control",
+      "index": 1,
+      "value": null,
+      "key": "/lpc/it8696e/0/control/1|Fan #2"
+    },
+    {
+      "id": "/lpc/it8696e/0/control/2",
+      "hw": "/lpc/it8696e/0",
+      "name": "Fan #3",
+      "type": "Control",
+      "index": 2,
+      "value": null,
+      "key": "/lpc/it8696e/0/control/2|Fan #3"
+    },
+    {
+      "id": "/lpc/it8696e/0/control/3",
+      "hw": "/lpc/it8696e/0",
+      "name": "Fan #4",
+      "type": "Control",
+      "index": 3,
+      "value": null,
+      "key": "/lpc/it8696e/0/control/3|Fan #4"
+    },
+    {
+      "id": "/lpc/it8696e/0/control/4",
+      "hw": "/lpc/it8696e/0",
+      "name": "Fan #5",
+      "type": "Control",
+      "index": 4,
+      "value": null,
+      "key": "/lpc/it8696e/0/control/4|Fan #5"
+    },
+    {
+      "id": "/lpc/it8696e/0/control/5",
+      "hw": "/lpc/it8696e/0",
+      "name": "Fan #6",
+      "type": "Control",
+      "index": 5,
+      "value": null,
+      "key": "/lpc/it8696e/0/control/5|Fan #6"
+    },
+    {
+      "id": "/lpc/it8696e/0/voltage/0",
+      "hw": "/lpc/it8696e/0",
+      "name": "Voltage #1",
+      "type": "Voltage",
+      "index": 0,
+      "value": 1.38,
+      "key": "/lpc/it8696e/0/voltage/0|Voltage #1"
+    },
+    {
+      "id": "/lpc/it8696e/0/voltage/1",
+      "hw": "/lpc/it8696e/0",
+      "name": "Voltage #2",
+      "type": "Voltage",
+      "index": 1,
+      "value": 1.992,
+      "key": "/lpc/it8696e/0/voltage/1|Voltage #2"
+    },
+    {
+      "id": "/lpc/it8696e/0/temperature/0",
+      "hw": "/lpc/it8696e/0",
+      "name": "Temperature #1",
+      "type": "Temperature",
+      "index": 0,
+      "value": 25,
+      "key": "/lpc/it8696e/0/temperature/0|Temperature #1"
+    },
+    {
+      "id": "/lpc/it8696e/0/temperature/1",
+      "hw": "/lpc/it8696e/0",
+      "name": "Temperature #2",
+      "type": "Temperature",
+      "index": 1,
+      "value": 39,
+      "key": "/lpc/it8696e/0/temperature/1|Temperature #2"
+    },
+    {
+      "id": "/lpc/it8696e/0/temperature/2",
+      "hw": "/lpc/it8696e/0",
+      "name": "Temperature #3",
+      "type": "Temperature",
+      "index": 2,
+      "value": 65,
+      "key": "/lpc/it8696e/0/temperature/2|Temperature #3"
+    },
+    {
+      "id": "/lpc/it8696e/0/fan/0",
+      "hw": "/lpc/it8696e/0",
+      "name": "Fan #1",
+      "type": "Fan",
+      "index": 0,
+      "value": 1744.186,
+      "key": "/lpc/it8696e/0/fan/0|Fan #1"
+    },
+    {
+      "id": "/lpc/it8696e/0/fan/1",
+      "hw": "/lpc/it8696e/0",
+      "name": "Fan #2",
+      "type": "Fan",
+      "index": 1,
+      "value": 0,
+      "key": "/lpc/it8696e/0/fan/1|Fan #2"
+    },
+    {
+      "id": "/lpc/it8696e/0/fan/2",
+      "hw": "/lpc/it8696e/0",
+      "name": "Fan #3",
+      "type": "Fan",
+      "index": 2,
+      "value": 0,
+      "key": "/lpc/it8696e/0/fan/2|Fan #3"
+    },
+    {
+      "id": "/lpc/it8696e/0/fan/3",
+      "hw": "/lpc/it8696e/0",
+      "name": "Fan #4",
+      "type": "Fan",
+      "index": 3,
+      "value": 0,
+      "key": "/lpc/it8696e/0/fan/3|Fan #4"
+    },
+    {
+      "id": "/lpc/it8696e/0/fan/4",
+      "hw": "/lpc/it8696e/0",
+      "name": "Fan #5",
+      "type": "Fan",
+      "index": 4,
+      "value": 1687.5,
+      "key": "/lpc/it8696e/0/fan/4|Fan #5"
+    },
+    {
+      "id": "/lpc/it8696e/0/fan/5",
+      "hw": "/lpc/it8696e/0",
+      "name": "Fan #6",
+      "type": "Fan",
+      "index": 5,
+      "value": 0,
+      "key": "/lpc/it8696e/0/fan/5|Fan #6"
+    },
+    {
+      "id": "/amdcpu/0/load/2",
+      "hw": "/amdcpu/0",
+      "name": "CPU Core #1",
+      "type": "Load",
+      "index": 2,
+      "value": 12.33,
+      "key": "/amdcpu/0/load/2|CPU Core #1"
+    },
+    {
+      "id": "/amdcpu/0/load/3",
+      "hw": "/amdcpu/0",
+      "name": "CPU Core #2",
+      "type": "Load",
+      "index": 3,
+      "value": 30.14,
+      "key": "/amdcpu/0/load/3|CPU Core #2"
+    },
+    {
+      "id": "/amdcpu/0/load/0",
+      "hw": "/amdcpu/0",
+      "name": "CPU Total",
+      "type": "Load",
+      "index": 0,
+      "value": 12.02,
+      "key": "/amdcpu/0/load/0|CPU Total"
+    },
+    {
+      "id": "/amdcpu/0/load/1",
+      "hw": "/amdcpu/0",
+      "name": "CPU Core Max",
+      "type": "Load",
+      "index": 1,
+      "value": 85.14,
+      "key": "/amdcpu/0/load/1|CPU Core Max"
+    },
+    {
+      "id": "/amdcpu/0/power/0",
+      "hw": "/amdcpu/0",
+      "name": "Package",
+      "type": "Power",
+      "index": 0,
+      "value": 70.76107,
+      "key": "/amdcpu/0/power/0|Package"
+    },
+    {
+      "id": "/amdcpu/0/clock/1",
+      "hw": "/amdcpu/0",
+      "name": "Cores (Average)",
+      "type": "Clock",
+      "index": 1,
+      "value": 4668,
+      "key": "/amdcpu/0/clock/1|Cores (Average)"
+    },
+    {
+      "id": "/amdcpu/0/clock/2",
+      "hw": "/amdcpu/0",
+      "name": "Cores (Average Effective)",
+      "type": "Clock",
+      "index": 2,
+      "value": 656,
+      "key": "/amdcpu/0/clock/2|Cores (Average Effective)"
+    },
+    {
+      "id": "/amdcpu/0/clock/3",
+      "hw": "/amdcpu/0",
+      "name": "Core #1",
+      "type": "Clock",
+      "index": 3,
+      "value": 5445,
+      "key": "/amdcpu/0/clock/3|Core #1"
+    },
+    {
+      "id": "/amdcpu/0/voltage/2",
+      "hw": "/amdcpu/0",
+      "name": "Core #1 VID",
+      "type": "Voltage",
+      "index": 2,
+      "value": 0.15625,
+      "key": "/amdcpu/0/voltage/2|Core #1 VID"
+    },
+    {
+      "id": "/amdcpu/0/temperature/2",
+      "hw": "/amdcpu/0",
+      "name": "Core (Tctl/Tdie)",
+      "type": "Temperature",
+      "index": 2,
+      "value": 65.62501,
+      "key": "/amdcpu/0/temperature/2|Core (Tctl/Tdie)"
+    },
+    {
+      "id": "/amdcpu/0/temperature/3",
+      "hw": "/amdcpu/0",
+      "name": "CCD1 (Tdie)",
+      "type": "Temperature",
+      "index": 3,
+      "value": 62.500004,
+      "key": "/amdcpu/0/temperature/3|CCD1 (Tdie)"
+    },
+    {
+      "id": "/amdcpu/0/temperature/4",
+      "hw": "/amdcpu/0",
+      "name": "CCD2 (Tdie)",
+      "type": "Temperature",
+      "index": 4,
+      "value": 38.125,
+      "key": "/amdcpu/0/temperature/4|CCD2 (Tdie)"
+    },
+    {
+      "id": "/amdcpu/0/temperature/5",
+      "hw": "/amdcpu/0",
+      "name": "CCDs Max (Tdie)",
+      "type": "Temperature",
+      "index": 5,
+      "value": 62.500004,
+      "key": "/amdcpu/0/temperature/5|CCDs Max (Tdie)"
+    },
+    {
+      "id": "/amdcpu/0/temperature/6",
+      "hw": "/amdcpu/0",
+      "name": "CCDs Average (Tdie)",
+      "type": "Temperature",
+      "index": 6,
+      "value": 50.3125,
+      "key": "/amdcpu/0/temperature/6|CCDs Average (Tdie)"
+    },
+    {
+      "id": "/vram/data/2",
+      "hw": "/vram",
+      "name": "Memory Used",
+      "type": "Data",
+      "index": 2,
+      "value": 34.380753,
+      "key": "/vram/data/2|Memory Used"
+    },
+    {
+      "id": "/vram/data/3",
+      "hw": "/vram",
+      "name": "Memory Available",
+      "type": "Data",
+      "index": 3,
+      "value": 2.737896,
+      "key": "/vram/data/3|Memory Available"
+    },
+    {
+      "id": "/vram/load/1",
+      "hw": "/vram",
+      "name": "Memory",
+      "type": "Load",
+      "index": 1,
+      "value": 92.62393,
+      "key": "/vram/load/1|Memory"
+    },
+    {
+      "id": "/ram/data/0",
+      "hw": "/ram",
+      "name": "Memory Used",
+      "type": "Data",
+      "index": 0,
+      "value": 23.113663,
+      "key": "/ram/data/0|Memory Used"
+    },
+    {
+      "id": "/ram/data/1",
+      "hw": "/ram",
+      "name": "Memory Available",
+      "type": "Data",
+      "index": 1,
+      "value": 7.9995995,
+      "key": "/ram/data/1|Memory Available"
+    },
+    {
+      "id": "/ram/load/0",
+      "hw": "/ram",
+      "name": "Memory",
+      "type": "Load",
+      "index": 0,
+      "value": 74.28878,
+      "key": "/ram/load/0|Memory"
+    },
+    {
+      "id": "/memory/dimm/1/temperature/0",
+      "hw": "/memory/dimm/1",
+      "name": "DIMM #1",
+      "type": "Temperature",
+      "index": 0,
+      "value": 35,
+      "key": "/memory/dimm/1/temperature/0|DIMM #1"
+    },
+    {
+      "id": "/memory/dimm/1/timing/20",
+      "hw": "/memory/dimm/1",
+      "name": "tCKAVGmin (Minimum Cycle Time)",
+      "type": "Timing",
+      "index": 20,
+      "value": 0.416,
+      "key": "/memory/dimm/1/timing/20|tCKAVGmin (Minimum Cycle Time)"
+    },
+    {
+      "id": "/memory/dimm/1/timing/21",
+      "hw": "/memory/dimm/1",
+      "name": "tCKAVGmax (Maximum Cycle Time)",
+      "type": "Timing",
+      "index": 21,
+      "value": 1.01,
+      "key": "/memory/dimm/1/timing/21|tCKAVGmax (Maximum Cycle Time)"
+    },
+    {
+      "id": "/memory/dimm/1/data/50",
+      "hw": "/memory/dimm/1",
+      "name": "Capacity",
+      "type": "Data",
+      "index": 50,
+      "value": 16,
+      "key": "/memory/dimm/1/data/50|Capacity"
+    },
+    {
+      "id": "/memory/dimm/3/temperature/0",
+      "hw": "/memory/dimm/3",
+      "name": "DIMM #3",
+      "type": "Temperature",
+      "index": 0,
+      "value": 33.5,
+      "key": "/memory/dimm/3/temperature/0|DIMM #3"
+    },
+    {
+      "id": "/memory/dimm/3/timing/20",
+      "hw": "/memory/dimm/3",
+      "name": "tCKAVGmin (Minimum Cycle Time)",
+      "type": "Timing",
+      "index": 20,
+      "value": 0.416,
+      "key": "/memory/dimm/3/timing/20|tCKAVGmin (Minimum Cycle Time)"
+    },
+    {
+      "id": "/memory/dimm/3/timing/21",
+      "hw": "/memory/dimm/3",
+      "name": "tCKAVGmax (Maximum Cycle Time)",
+      "type": "Timing",
+      "index": 21,
+      "value": 1.01,
+      "key": "/memory/dimm/3/timing/21|tCKAVGmax (Maximum Cycle Time)"
+    },
+    {
+      "id": "/memory/dimm/3/data/50",
+      "hw": "/memory/dimm/3",
+      "name": "Capacity",
+      "type": "Data",
+      "index": 50,
+      "value": 16,
+      "key": "/memory/dimm/3/data/50|Capacity"
+    },
+    {
+      "id": "/gpu-amd/0/smalldata/2",
+      "hw": "/gpu-amd/0",
+      "name": "GPU Memory Total",
+      "type": "SmallData",
+      "index": 2,
+      "value": 512,
+      "key": "/gpu-amd/0/smalldata/2|GPU Memory Total"
+    },
+    {
+      "id": "/gpu-amd/0/load/2",
+      "hw": "/gpu-amd/0",
+      "name": "D3D 3D",
+      "type": "Load",
+      "index": 2,
+      "value": 4.5222683,
+      "key": "/gpu-amd/0/load/2|D3D 3D"
+    },
+    {
+      "id": "/gpu-amd/0/smalldata/0",
+      "hw": "/gpu-amd/0",
+      "name": "GPU Memory Used",
+      "type": "SmallData",
+      "index": 0,
+      "value": 413,
+      "key": "/gpu-amd/0/smalldata/0|GPU Memory Used"
+    },
+    {
+      "id": "/gpu-amd/0/clock/0",
+      "hw": "/gpu-amd/0",
+      "name": "GPU Core",
+      "type": "Clock",
+      "index": 0,
+      "value": 600,
+      "key": "/gpu-amd/0/clock/0|GPU Core"
+    },
+    {
+      "id": "/gpu-amd/0/temperature/4",
+      "hw": "/gpu-amd/0",
+      "name": "GPU VR SoC",
+      "type": "Temperature",
+      "index": 4,
+      "value": 51,
+      "key": "/gpu-amd/0/temperature/4|GPU VR SoC"
+    },
+    {
+      "id": "/gpu-amd/0/load/0",
+      "hw": "/gpu-amd/0",
+      "name": "GPU Core",
+      "type": "Load",
+      "index": 0,
+      "value": 0,
+      "key": "/gpu-amd/0/load/0|GPU Core"
+    },
+    {
+      "id": "/gpu-amd/0/power/0",
+      "hw": "/gpu-amd/0",
+      "name": "GPU Core",
+      "type": "Power",
+      "index": 0,
+      "value": 43,
+      "key": "/gpu-amd/0/power/0|GPU Core"
+    },
+    {
+      "id": "/gpu-amd/0/power/2",
+      "hw": "/gpu-amd/0",
+      "name": "GPU SoC",
+      "type": "Power",
+      "index": 2,
+      "value": 13,
+      "key": "/gpu-amd/0/power/2|GPU SoC"
+    },
+    {
+      "id": "/gpu-nvidia/0/temperature/0",
+      "hw": "/gpu-nvidia/0",
+      "name": "GPU Core",
+      "type": "Temperature",
+      "index": 0,
+      "value": 30.363281,
+      "key": "/gpu-nvidia/0/temperature/0|GPU Core"
+    },
+    {
+      "id": "/gpu-nvidia/0/clock/0",
+      "hw": "/gpu-nvidia/0",
+      "name": "GPU Core",
+      "type": "Clock",
+      "index": 0,
+      "value": 465,
+      "key": "/gpu-nvidia/0/clock/0|GPU Core"
+    },
+    {
+      "id": "/gpu-nvidia/0/fan/1",
+      "hw": "/gpu-nvidia/0",
+      "name": "GPU Fan 1",
+      "type": "Fan",
+      "index": 1,
+      "value": 0,
+      "key": "/gpu-nvidia/0/fan/1|GPU Fan 1"
+    },
+    {
+      "id": "/gpu-nvidia/0/load/0",
+      "hw": "/gpu-nvidia/0",
+      "name": "GPU Core",
+      "type": "Load",
+      "index": 0,
+      "value": 2,
+      "key": "/gpu-nvidia/0/load/0|GPU Core"
+    },
+    {
+      "id": "/gpu-nvidia/0/load/3",
+      "hw": "/gpu-nvidia/0",
+      "name": "GPU Bus",
+      "type": "Load",
+      "index": 3,
+      "value": 12,
+      "key": "/gpu-nvidia/0/load/3|GPU Bus"
+    },
+    {
+      "id": "/gpu-nvidia/0/temperature/3",
+      "hw": "/gpu-nvidia/0",
+      "name": "GPU Memory Junction",
+      "type": "Temperature",
+      "index": 3,
+      "value": 42,
+      "key": "/gpu-nvidia/0/temperature/3|GPU Memory Junction"
+    },
+    {
+      "id": "/gpu-nvidia/0/smalldata/2",
+      "hw": "/gpu-nvidia/0",
+      "name": "GPU Memory Total",
+      "type": "SmallData",
+      "index": 2,
+      "value": 16311,
+      "key": "/gpu-nvidia/0/smalldata/2|GPU Memory Total"
+    },
+    {
+      "id": "/gpu-nvidia/0/smalldata/0",
+      "hw": "/gpu-nvidia/0",
+      "name": "GPU Memory Free",
+      "type": "SmallData",
+      "index": 0,
+      "value": 13881,
+      "key": "/gpu-nvidia/0/smalldata/0|GPU Memory Free"
+    },
+    {
+      "id": "/gpu-nvidia/0/smalldata/1",
+      "hw": "/gpu-nvidia/0",
+      "name": "GPU Memory Used",
+      "type": "SmallData",
+      "index": 1,
+      "value": 2429,
+      "key": "/gpu-nvidia/0/smalldata/1|GPU Memory Used"
+    },
+    {
+      "id": "/gpu-nvidia/0/load/3",
+      "hw": "/gpu-nvidia/0",
+      "name": "GPU Memory",
+      "type": "Load",
+      "index": 3,
+      "value": 14.89488,
+      "key": "/gpu-nvidia/0/load/3|GPU Memory"
+    },
+    {
+      "id": "/gpu-nvidia/0/power/0",
+      "hw": "/gpu-nvidia/0",
+      "name": "GPU Package",
+      "type": "Power",
+      "index": 0,
+      "value": 12.138,
+      "key": "/gpu-nvidia/0/power/0|GPU Package"
+    },
+    {
+      "id": "/nvme/0/temperature/0",
+      "hw": "/nvme/0",
+      "name": "Composite Temperature",
+      "type": "Temperature",
+      "index": 0,
+      "value": 31,
+      "key": "/nvme/0/temperature/0|Composite Temperature"
+    },
+    {
+      "id": "/nvme/0/temperature/1",
+      "hw": "/nvme/0",
+      "name": "Temperature #1",
+      "type": "Temperature",
+      "index": 1,
+      "value": 30.850006,
+      "key": "/nvme/0/temperature/1|Temperature #1"
+    },
+    {
+      "id": "/nvme/0/level/20",
+      "hw": "/nvme/0",
+      "name": "Life",
+      "type": "Level",
+      "index": 20,
+      "value": 97,
+      "key": "/nvme/0/level/20|Life"
+    },
+    {
+      "id": "/nvme/0/data/32",
+      "hw": "/nvme/0",
+      "name": "Total Space",
+      "type": "Data",
+      "index": 32,
+      "value": 1000.2049,
+      "key": "/nvme/0/data/32|Total Space"
+    },
+    {
+      "id": "/nvme/0/throughput/54",
+      "hw": "/nvme/0",
+      "name": "Read Rate",
+      "type": "Throughput",
+      "index": 54,
+      "value": 0,
+      "key": "/nvme/0/throughput/54|Read Rate"
+    },
+    {
+      "id": "/nvme/0/throughput/55",
+      "hw": "/nvme/0",
+      "name": "Write Rate",
+      "type": "Throughput",
+      "index": 55,
+      "value": 419652.34,
+      "key": "/nvme/0/throughput/55|Write Rate"
+    }
+  ]
+}

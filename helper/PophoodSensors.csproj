@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <AssemblyName>pophood-sensors</AssemblyName>
+    <RootNamespace>Pophood.Sensors</RootNamespace>
+    <Version>0.1.0</Version>
+    <PublishAot>true</PublishAot>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <RestoreLockedMode>true</RestoreLockedMode>
+    <WarningsAsErrors>$(WarningsAsErrors);RS0030</WarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\third_party\LibreHardwareMonitor\LibreHardwareMonitorLib\LibreHardwareMonitorLib.csproj" />
+    <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="5.6.0" PrivateAssets="all" />
+    <AdditionalFiles Include="BannedSymbols.txt" />
+    <InternalsVisibleTo Include="PophoodSensors.Tests" />
+    <!-- Static imports that aren't KnownDLLs (bcrypt, IPHLPAPI) resolve before Main, application directory first;
+         SetDefaultDllDirectories can't cover them. LOAD_LIBRARY_SEARCH_SYSTEM32 (0x800) for the loader. -->
+    <LinkerArg Include="/DEPENDENTLOADFLAG:0x800" />
+    <!-- The flag doesn't reach the imports of those imports: CRYPT32's own flag is 0, and its delay import DPAPI.dll
+         was resolved at process start, application directory first. Delay-loaded itself, CRYPT32 loads after
+         SetDefaultDllDirectories. -->
+    <LinkerArg Include="/DELAYLOAD:CRYPT32.dll" />
+    <LinkerArg Include="delayimp.lib" />
+  </ItemGroup>
+
+</Project>

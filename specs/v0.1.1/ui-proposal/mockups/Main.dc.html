@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pophood v0.1.1 · Drill-down</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="{{vars}} min-height: 100vh; display: flex; flex-wrap: wrap; background: var(--bg); color: var(--text); font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.45">
+
+<nav aria-label="Main" style="flex: 1 1 200px; max-width: 100%; box-sizing: border-box; padding: 24px 16px; border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 28px">
+  <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px">
+    <svg viewBox="0 0 24 24" aria-hidden="true" style="width: 26px; height: 26px; fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="M3 15c2-6 6-9 9-9s7 3 9 9"></path><path d="M3 15h18"></path><path d="M8 19h8"></path></svg>
+    <span style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em">Pophood</span>
+    <button type="button" onClick="{{toggleTheme}}" aria-label="{{themeLabel}}" style="margin-left: auto; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 8px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer">
+      <sc-if value="{{isDark}}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 24 24" aria-hidden="true" style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></sc-if>
+      <sc-if value="{{isLight}}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" aria-hidden="true" style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"></path></svg></sc-if>
+    </button>
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 4px">
+    <button type="button" aria-current="page" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border: 0; border-radius: 8px; background: var(--raised); color: var(--text); font: inherit; font-weight: 500; text-align: left; cursor: pointer">Dashboard</button>
+  </div>
+  <div style="margin-top: auto; display: flex; flex-direction: column; gap: 12px">
+    <div style="display: flex; flex-direction: column; gap: 12px; padding: 14px 12px; border: 1px solid var(--line); border-radius: 10px; font-size: 12px; color: var(--muted)">
+      <div style="display: flex; gap: 8px; align-items: flex-start">
+        <svg viewBox="0 0 24 24" aria-hidden="true" style="width: 16px; height: 16px; fill: none; stroke: var(--ok-icon); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+        <div><div style="color: var(--text)">Sensor helper verified</div><div>{{helperSub}}</div></div>
+      </div>
+      <div style="display: flex; gap: 8px; align-items: flex-start">
+        <svg viewBox="0 0 24 24" aria-hidden="true" style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none"><rect x="4" y="4" width="16" height="16" rx="2"></rect><path d="M9 9h6v6H9z"></path></svg>
+        <div><div style="color: var(--text)">PawnIO 2.2.0</div><div>Detected, not managed by Pophood</div></div>
+      </div>
+      <div style="display: flex; gap: 8px; align-items: flex-start">
+        <svg viewBox="0 0 24 24" aria-hidden="true" style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none"><circle cx="12" cy="12" r="9"></circle><path d="M5.6 5.6l12.8 12.8"></path></svg>
+        <div><div style="color: var(--text)">No network</div><div>Pophood makes no connections. Its web view asks Windows about your Microsoft account; Windows may then contact login.live.com.</div></div>
+      </div>
+    </div>
+    <button type="button" style="padding: 0 12px; border: 0; background: transparent; color: var(--muted); font: inherit; font-size: 12px; text-align: left; cursor: pointer">About and licenses</button>
+  </div>
+</nav>
+
+<main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 28px 32px 40px; display: flex; flex-direction: column; gap: 20px">
+  <nav aria-label="Breadcrumb" style="font-size: 13px; color: var(--muted)"><button type="button" style="padding: 0; border: 0; background: transparent; color: var(--muted); font: inherit; text-decoration: underline; cursor: pointer">Dashboard</button> <span aria-hidden="true">/</span> <span aria-current="page">{{crumb}}</span></nav>
+  <header>
+    <h1 style="margin: 0; font-size: 26px; font-weight: 600; letter-spacing: -0.01em">{{title}}</h1>
+    <p style="margin: 4px 0 0; color: var(--muted)">{{subline}}</p>
+  </header>
+
+  <sc-if value="{{reduced}}" hint-placeholder-val="{{ false }}">
+    <section aria-label="Reduced sensors" style="display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: center; justify-content: space-between; padding: 18px 20px; border-radius: 12px; border: 1px solid var(--info-line); background: var(--info-bg)">
+      <div style="display: flex; gap: 14px; align-items: flex-start; flex: 1 1 420px">
+        <svg viewBox="0 0 24 24" aria-hidden="true" style="width: 16px; height: 16px; margin-top: 2px; fill: none; stroke: var(--info-icon); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"></path></svg>
+        <div>
+          <div style="font-weight: 600; font-size: 15px">Reduced sensors</div>
+          <div style="margin-top: 2px; color: var(--info-text)">CPU temperature, power and clocks, drives, fans and DIMMs need the sensor helper elevated. Pophood itself never runs as admin.</div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; align-items: flex-start">
+        <button type="button" style="min-height: 44px; padding: 0 18px; border: 0; border-radius: 8px; background: var(--info-fill); color: var(--on-info); font: inherit; font-weight: 600; cursor: pointer">Enable full sensors</button>
+        <span style="font-size: 12px; color: var(--info-text)">One UAC prompt · exits when Pophood closes</span>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{showTop}}" hint-placeholder-val="{{ false }}">
+    <div style="position: {{topPosition}}; top: 0; z-index: 10; margin-top: -8px; padding: 8px 0 4px; background: var(--bg)">
+      <section aria-label="Sensor detail" style="display: flex; flex-direction: column; gap: 12px; padding: 16px 20px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 10px 24px -14px var(--shadow)">
+        <div style="display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: flex-end">
+          <div style="flex: 1 1 320px; min-width: 0">
+            <div style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">{{sel.group}}</div>
+            <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px">
+              <h2 style="margin: 2px 0 0; font-size: 22px; font-weight: 600; overflow-wrap: anywhere">{{sel.name}}</h2>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted); overflow-wrap: anywhere">{{sel.id}}</span>
+            </div>
+          </div>
+          <div style="text-align: right">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 40px; font-weight: 500; line-height: 1">{{sel.value}}<span style="font-size: 16px; color: var(--muted)"> {{sel.unit}}</span></div>
+            <div style="margin-top: 6px; font-size: 12px; color: var(--muted)">now · refreshes every second</div>
+          </div>
+          <dl style="margin: 0; display: flex; flex-wrap: wrap; gap: 10px">
+            <div style="min-width: 120px; padding: 10px 12px; border-radius: 10px; background: var(--inset)"><dt style="font-size: 12px; color: var(--muted)">Min (10 min)</dt><dd style="margin: 2px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 16px">{{sel.min}}</dd></div>
+            <div style="min-width: 120px; padding: 10px 12px; border-radius: 10px; background: var(--inset)"><dt style="font-size: 12px; color: var(--muted)">Max (10 min)</dt><dd style="margin: 2px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 16px">{{sel.max}}</dd></div>
+            <div style="min-width: 80px; padding: 10px 12px; border-radius: 10px; background: var(--inset)"><dt style="font-size: 12px; color: var(--muted)">Unit</dt><dd style="margin: 2px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 16px">{{sel.unitText}}</dd></div>
+          </dl>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <svg viewBox="0 0 600 160" preserveAspectRatio="none" role="img" aria-label="{{sel.chartLabel}}" style="display: block; width: 100%; height: 130px"><path d="M0 0H600M0 80H600M0 160H600" style="fill: none; stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke"></path><path d="{{sel.area}}" style="fill: var(--accent); fill-opacity: 0.1; stroke: none"></path><path d="{{sel.line}}" style="fill: none; stroke: var(--accent); stroke-width: 2; vector-effect: non-scaling-stroke"></path></svg>
+          <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted)"><span>−10 min</span><span>−5 min</span><span>now</span></div>
+        </div>
+        <sc-if value="{{rename}}" hint-placeholder-val="{{ false }}">
+          <form style="display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; padding-top: 12px; border-top: 1px solid var(--line)">
+            <label for="rename" style="font-weight: 600">Display name</label>
+            <input id="rename" type="text" value="{{draft}}" onChange="{{onDraft}}" placeholder="{{sel.defaultName}}" style="flex: 0 1 320px; min-height: 40px; box-sizing: border-box; padding: 0 12px; border-radius: 8px; border: 1px solid var(--strong); background: var(--inset); color: var(--text); font: inherit; font-size: 15px">
+            <button type="button" onClick="{{save}}" style="min-height: 40px; padding: 0 18px; border-radius: 8px; border: 0; background: var(--accent-fill); color: var(--on-accent); font: inherit; font-weight: 600; cursor: pointer">Save name</button>
+            <button type="button" onClick="{{reset}}" style="min-height: 40px; padding: 0 14px; border-radius: 8px; border: 1px solid var(--strong); background: transparent; color: var(--text); font: inherit; cursor: pointer">Reset to “{{sel.defaultName}}”</button>
+            <span style="font-size: 12px; color: var(--muted)">Shows on the dashboard, in this list and in run traces. Saved on this PC only.</span>
+          </form>
+        </sc-if>
+      </section>
+    </div>
+  </sc-if>
+
+  <sc-for list="{{sections}}" as="sec" hint-placeholder-count="1">
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <sc-if value="{{sec.hasHeading}}" hint-placeholder-val="{{ false }}">
+        <h2 style="margin: 4px 0 0; font-size: 15px; font-weight: 600">{{sec.heading}}</h2>
+      </sc-if>
+      <div style="columns: 270px; column-gap: 16px">
+        <sc-for list="{{sec.groups}}" as="g" hint-placeholder-count="4">
+          <section aria-label="{{g.label}}" style="break-inside: {{g.breakInside}}; box-decoration-break: clone; -webkit-box-decoration-break: clone; margin: 0 0 16px; padding: 4px 6px 6px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line)">
+            <h3 style="break-after: avoid; margin: 0; padding: 8px 8px 6px; font-size: 12px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">{{g.label}} · {{g.count}}</h3>
+            <sc-if value="{{g.locked}}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; gap: 6px; align-items: center; padding: 2px 8px 8px; font-size: 12px; color: var(--muted)"><svg viewBox="0 0 24 24" aria-hidden="true" style="width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>{{g.lockLabel}}</div>
+            </sc-if>
+            <sc-for list="{{g.rows}}" as="row" hint-placeholder-count="5">
+              <button type="button" onClick="{{row.pick}}" aria-pressed="{{row.on}}" style="break-inside: avoid; display: flex; width: 100%; box-sizing: border-box; gap: 10px; align-items: center; min-height: 36px; padding: 6px 8px; border-radius: 8px; border: 1px solid {{row.border}}; background: {{row.bg}}; color: var(--text); font: inherit; text-align: left; cursor: pointer">
+                <span style="flex: 1; min-width: 0; overflow-wrap: anywhere">{{row.name}}<sc-if value="{{row.renamed}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: var(--muted)"> · {{row.defaultName}}</span></sc-if></span>
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; white-space: nowrap; color: {{row.valColor}}">{{row.now}}</span>
+              </button>
+            </sc-for>
+          </section>
+        </sc-for>
+      </div>
+    </div>
+  </sc-for>
+</main>
+
+<sc-if value="{{showDrawer}}" hint-placeholder-val="{{ false }}">
+  <section aria-label="Sensor detail" style="position: fixed; top: 0; right: 0; bottom: 0; z-index: 20; width: 440px; max-width: 100%; box-sizing: border-box; overflow-y: auto; display: flex; flex-direction: column; gap: 18px; padding: 20px 22px 24px; background: var(--surface); border-left: 1px solid var(--strong); box-shadow: -12px 0 32px var(--shadow)">
+    <div style="display: flex; align-items: flex-start; gap: 12px">
+      <div style="flex: 1; min-width: 0">
+        <div style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">{{sel.group}}</div>
+        <h2 style="margin: 2px 0 0; font-size: 22px; font-weight: 600; overflow-wrap: anywhere">{{sel.name}}</h2>
+        <div style="margin-top: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted); overflow-wrap: anywhere">{{sel.id}}</div>
+      </div>
+      <button type="button" onClick="{{close}}" aria-label="Close sensor detail" style="width: 40px; height: 40px; flex: none; display: flex; align-items: center; justify-content: center; border-radius: 8px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer"><svg viewBox="0 0 24 24" aria-hidden="true" style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+    </div>
+    <div>
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 44px; font-weight: 500; line-height: 1">{{sel.value}}<span style="font-size: 16px; color: var(--muted)"> {{sel.unit}}</span></div>
+      <div style="margin-top: 6px; font-size: 12px; color: var(--muted)">now · refreshes every second</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <svg viewBox="0 0 600 160" preserveAspectRatio="none" role="img" aria-label="{{sel.chartLabel}}" style="display: block; width: 100%; height: 180px"><path d="M0 0H600M0 80H600M0 160H600" style="fill: none; stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke"></path><path d="{{sel.area}}" style="fill: var(--accent); fill-opacity: 0.1; stroke: none"></path><path d="{{sel.line}}" style="fill: none; stroke: var(--accent); stroke-width: 2; vector-effect: non-scaling-stroke"></path></svg>
+      <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted)"><span>−10 min</span><span>−5 min</span><span>now</span></div>
+    </div>
+    <dl style="margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+      <div style="padding: 12px; border-radius: 10px; background: var(--inset)"><dt style="font-size: 12px; color: var(--muted)">Min (10 min)</dt><dd style="margin: 4px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 16px">{{sel.min}}</dd></div>
+      <div style="padding: 12px; border-radius: 10px; background: var(--inset)"><dt style="font-size: 12px; color: var(--muted)">Max (10 min)</dt><dd style="margin: 4px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 16px">{{sel.max}}</dd></div>
+      <div style="padding: 12px; border-radius: 10px; background: var(--inset)"><dt style="font-size: 12px; color: var(--muted)">Unit</dt><dd style="margin: 4px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 16px">{{sel.unitText}}</dd></div>
+    </dl>
+    <sc-if value="{{rename}}" hint-placeholder-val="{{ false }}">
+      <form style="display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 10px; border: 1px solid var(--strong)">
+        <label for="rename" style="font-weight: 600">Display name</label>
+        <input id="rename" type="text" value="{{draft}}" onChange="{{onDraft}}" placeholder="{{sel.defaultName}}" style="min-height: 44px; box-sizing: border-box; padding: 0 12px; border-radius: 8px; border: 1px solid var(--strong); background: var(--inset); color: var(--text); font: inherit; font-size: 15px">
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <button type="button" onClick="{{save}}" style="min-height: 44px; padding: 0 18px; border-radius: 8px; border: 0; background: var(--accent-fill); color: var(--on-accent); font: inherit; font-weight: 600; cursor: pointer">Save name</button>
+          <button type="button" onClick="{{reset}}" style="min-height: 44px; padding: 0 14px; border-radius: 8px; border: 1px solid var(--strong); background: transparent; color: var(--text); font: inherit; cursor: pointer">Reset to “{{sel.defaultName}}”</button>
+        </div>
+        <p style="margin: 0; font-size: 12px; color: var(--muted)">Shows on the dashboard, in this list and in run traces. Saved on this PC only.</p>
+      </form>
+    </sc-if>
+  </section>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"view":{"editor":"enum","options":["cpu","cpuReduced","gpu","memory","disk","motherboard"],"default":"cpu"},"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"detail":{"editor":"enum","options":["drawer","top"],"default":"drawer"},"stickyChart":{"editor":"boolean","default":true},"rename":{"editor":"boolean","default":false},"open":{"editor":null,"default":""},"$preview":{"width":1920,"height":1300}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    // selected: undefined = take the "open" prop, null = drawer closed, a key = that sensor.
+    this.state = { selected: undefined, theme: null, names: {}, draft: '' };
+  }
+
+  componentDidUpdate(prev) {
+    if (prev.theme !== this.props.theme && this.state.theme !== null) this.setState({ theme: null });
+    if ((prev.view !== this.props.view || prev.open !== this.props.open || prev.detail !== this.props.detail) && this.state.selected !== undefined) this.setState({ selected: undefined });
+  }
+
+  // Real names and values from the owner's PC (P1 dump, idle), sorted by LHM index. cpuReduced is the unprivileged dump,
+  // with every non-Load CPU reading null, as the helper sends it without PawnIO (helper/Availability.cs).
+  data() {
+    if (this._data) return this._data;
+    this._data = {"cpu":[["Load","CPU Total","load/0",12.02],["Power","Package","power/0",70.7611],["Factor","Core #1","factor/0",54.5534],["Clock","Bus Speed","clock/0",99.8105],["Load","CPU Core Max","load/1",85.14],["Clock","Cores (Average)","clock/1",4668],["Power","Core #1 (SMU)","power/1",5.70222],["Factor","Core #2","factor/1",54.5534],["Load","CPU Core #1","load/2",12.33],["Clock","Cores (Average Effective)","clock/2",656],["Voltage","Core #1 VID","voltage/2",0.15625],["Power","Core #2 (SMU)","power/2",8.50054],["Factor","Core #3","factor/2",54.5534],["Temperature","Core (Tctl/Tdie)","temperature/2",65.625],["Load","CPU Core #2","load/3",30.14],["Clock","Core #1","clock/3",5445],["Voltage","Core #2 VID","voltage/3",0.15625],["Power","Core #3 (SMU)","power/3",12.1573],["Factor","Core #4","factor/3",54.8539],["Temperature","CCD1 (Tdie)","temperature/3",62.5],["Load","CPU Core #3","load/4",45.95],["Clock","Core #1 (Effective)","clock/4",1417],["Voltage","Core #3 VID","voltage/4",0.15625],["Power","Core #4 (SMU)","power/4",3.0088],["Factor","Core #5","factor/4",54.8539],["Temperature","CCD2 (Tdie)","temperature/4",38.125],["Load","CPU Core #4","load/5",39.73],["Clock","Core #2","clock/5",5445],["Voltage","Core #4 VID","voltage/5",0.15625],["Power","Core #5 (SMU)","power/5",2.44387],["Factor","Core #6","factor/5",54.8539],["Temperature","CCDs Max (Tdie)","temperature/5",62.5],["Load","CPU Core #5","load/6",19.18],["Clock","Core #2 (Effective)","clock/6",2257.5],["Voltage","Core #5 VID","voltage/6",0.15625],["Power","Core #6 (SMU)","power/6",0.983092],["Factor","Core #7","factor/6",53.6016],["Temperature","CCDs Average (Tdie)","temperature/6",50.3125],["Load","CPU Core #6","load/7",85.14],["Clock","Core #3","clock/7",5445],["Voltage","Core #6 VID","voltage/7",0.15625],["Power","Core #7 (SMU)","power/7",0.223894],["Factor","Core #8","factor/7",53.6016],["Load","CPU Core #7","load/8",6.85],["Clock","Core #3 (Effective)","clock/8",2945],["Voltage","Core #7 VID","voltage/8",0.15625],["Power","Core #8 (SMU)","power/8",0.377349],["Factor","Core #9","factor/8",53.6016],["Load","CPU Core #8","load/9",9.59],["Clock","Core #4","clock/9",5475],["Voltage","Core #8 VID","voltage/9",0.15625],["Power","Core #9 (SMU)","power/9",0.0840098],["Factor","Core #10","factor/9",53.6016],["Load","CPU Core #9","load/10",2.74],["Clock","Core #4 (Effective)","clock/10",463],["Voltage","Core #9 VID","voltage/10",0.15625],["Power","Core #10 (SMU)","power/10",0.127552],["Factor","Core #11","factor/10",53.6016],["Load","CPU Core #10","load/11",9.59],["Clock","Core #5","clock/11",5407],["Voltage","Core #10 VID","voltage/11",0.15625],["Power","Core #11 (SMU)","power/11",2.01735],["Factor","Core #12","factor/11",53.6016],["Load","CPU Core #11","load/12",4.05],["Clock","Core #5 (Effective)","clock/12",264],["Voltage","Core #11 VID","voltage/12",0.15625],["Power","Core #12 (SMU)","power/12",0.0723548],["Load","CPU Core #12","load/13",4.11],["Clock","Core #6","clock/13",4756],["Voltage","Core #12 VID","voltage/13",0.15625],["Load","CPU Core #13","load/14",1.35],["Clock","Core #6 (Effective)","clock/14",111],["Load","CPU Core #14","load/15",0],["Clock","Core #7","clock/15",4471],["Load","CPU Core #15","load/16",2.7],["Clock","Core #7 (Effective)","clock/16",48],["Load","CPU Core #16","load/17",2.7],["Clock","Core #8","clock/17",3846],["Load","CPU Core #17","load/18",0],["Clock","Core #8 (Effective)","clock/18",58.5],["Load","CPU Core #18","load/19",1.37],["Clock","Core #9","clock/19",3333],["Load","CPU Core #19","load/20",0],["Clock","Core #9 (Effective)","clock/20",11.5],["Load","CPU Core #20","load/21",0],["Clock","Core #10","clock/21",3414],["Load","CPU Core #21","load/22",4.05],["Clock","Core #10 (Effective)","clock/22",21],["Load","CPU Core #22","load/23",5.48],["Clock","Core #11","clock/23",5350],["Load","CPU Core #23","load/24",0],["Clock","Core #11 (Effective)","clock/24",269],["Load","CPU Core #24","load/25",1.37],["Clock","Core #12","clock/25",3633],["Clock","Core #12 (Effective)","clock/26",11]],"cpuReduced":[["Load","CPU Total","load/0",14.89],["Power","Package","power/0",null],["Factor","Core #1","factor/0",null],["Load","CPU Core Max","load/1",100],["Clock","Cores (Average)","clock/1",null],["Power","Core #1 (SMU)","power/1",null],["Factor","Core #2","factor/1",null],["Load","CPU Core #1","load/2",45.71],["Clock","Cores (Average Effective)","clock/2",null],["Voltage","Core #1 VID","voltage/2",null],["Power","Core #2 (SMU)","power/2",null],["Factor","Core #3","factor/2",null],["Temperature","Core (Tctl/Tdie)","temperature/2",null],["Load","CPU Core #2","load/3",17.14],["Clock","Core #1","clock/3",null],["Voltage","Core #2 VID","voltage/3",null],["Power","Core #3 (SMU)","power/3",null],["Factor","Core #4","factor/3",null],["Load","CPU Core #3","load/4",100],["Clock","Core #1 (Effective)","clock/4",null],["Voltage","Core #3 VID","voltage/4",null],["Power","Core #4 (SMU)","power/4",null],["Factor","Core #5","factor/4",null],["Load","CPU Core #4","load/5",44.29],["Clock","Core #2","clock/5",null],["Voltage","Core #4 VID","voltage/5",null],["Power","Core #5 (SMU)","power/5",null],["Factor","Core #6","factor/5",null],["Load","CPU Core #5","load/6",22.54],["Clock","Core #2 (Effective)","clock/6",null],["Voltage","Core #5 VID","voltage/6",null],["Power","Core #6 (SMU)","power/6",null],["Factor","Core #7","factor/6",null],["Load","CPU Core #6","load/7",18.57],["Clock","Core #3","clock/7",null],["Voltage","Core #6 VID","voltage/7",null],["Power","Core #7 (SMU)","power/7",null],["Factor","Core #8","factor/7",null],["Load","CPU Core #7","load/8",20],["Clock","Core #3 (Effective)","clock/8",null],["Voltage","Core #7 VID","voltage/8",null],["Power","Core #8 (SMU)","power/8",null],["Factor","Core #9","factor/8",null],["Load","CPU Core #8","load/9",7.14],["Clock","Core #4","clock/9",null],["Voltage","Core #8 VID","voltage/9",null],["Power","Core #9 (SMU)","power/9",null],["Factor","Core #10","factor/9",null],["Load","CPU Core #9","load/10",7.14],["Clock","Core #4 (Effective)","clock/10",null],["Voltage","Core #9 VID","voltage/10",null],["Power","Core #10 (SMU)","power/10",null],["Factor","Core #11","factor/10",null],["Load","CPU Core #10","load/11",8.57],["Clock","Core #5","clock/11",null],["Voltage","Core #10 VID","voltage/11",null],["Power","Core #11 (SMU)","power/11",null],["Factor","Core #12","factor/11",null],["Load","CPU Core #11","load/12",10],["Clock","Core #5 (Effective)","clock/12",null],["Voltage","Core #11 VID","voltage/12",null],["Power","Core #12 (SMU)","power/12",null],["Load","CPU Core #12","load/13",2.82],["Clock","Core #6","clock/13",null],["Voltage","Core #12 VID","voltage/13",null],["Load","CPU Core #13","load/14",2.82],["Clock","Core #6 (Effective)","clock/14",null],["Load","CPU Core #14","load/15",1.41],["Clock","Core #7","clock/15",null],["Load","CPU Core #15","load/16",5.63],["Clock","Core #7 (Effective)","clock/16",null],["Load","CPU Core #16","load/17",8.45],["Clock","Core #8","clock/17",null],["Load","CPU Core #17","load/18",0],["Clock","Core #8 (Effective)","clock/18",null],["Load","CPU Core #18","load/19",0],["Clock","Core #9","clock/19",null],["Load","CPU Core #19","load/20",1.41],["Clock","Core #9 (Effective)","clock/20",null],["Load","CPU Core #20","load/21",1.41],["Clock","Core #10","clock/21",null],["Load","CPU Core #21","load/22",14.08],["Clock","Core #10 (Effective)","clock/22",null],["Load","CPU Core #22","load/23",16.9],["Clock","Core #11","clock/23",null],["Load","CPU Core #23","load/24",1.41],["Clock","Core #11 (Effective)","clock/24",null],["Load","CPU Core #24","load/25",0],["Clock","Core #12","clock/25",null],["Clock","Core #12 (Effective)","clock/26",null]],"gpu":[["Temperature","GPU Core","temperature/0",30.3633],["Clock","GPU Core","clock/0",465],["Load","GPU Core","load/0",2],["Voltage","GPU Core Voltage","voltage/0",0.69],["SmallData","GPU Memory Free","smalldata/0",13881],["Power","GPU Package","power/0",12.138],["Throughput","GPU PCIe Rx","throughput/0",36555800],["Fan","GPU Fan 1","fan/1",0],["Control","GPU Fan 1","control/1",0],["Load","GPU Memory Controller","load/1",1],["SmallData","GPU Memory Used","smalldata/1",2429],["Throughput","GPU PCIe Tx","throughput/1",107936000],["Fan","GPU Fan 2","fan/2",0],["Control","GPU Fan 2","control/2",0],["Load","GPU Video Engine","load/2",0],["SmallData","GPU Memory Total","smalldata/2",16311],["Load","GPU Bus","load/3",12],["SmallData","D3D Dedicated Memory Used","smalldata/3",2187.3],["Temperature","GPU Memory Junction","temperature/3",42],["Load","GPU Memory","load/3",14.8949],["Clock","GPU Memory","clock/4",810],["Load","GPU Power","load/4",6.387],["SmallData","D3D Shared Memory Used","smalldata/4",216.047],["Load","GPU Board Power","load/5",11.218],["Load","D3D 3D","load/7",4.58084],["Load","D3D Copy","load/8",0],["Load","D3D Copy","load/9",0.425856],["Load","D3D Copy","load/10",0.206452],["Load","D3D Copy","load/11",0],["Load","D3D Copy","load/12",0],["Load","D3D Copy","load/13",0],["Load","D3D JPEG Decode 0","load/14",0],["Load","D3D Optical Flow Accelerator 0","load/15",0],["Load","D3D Security","load/16",0],["Load","D3D Security_1","load/17",0],["Load","D3D VR","load/18",0],["Load","D3D Video Decode","load/19",0.671716],["Load","D3D Video Encode","load/20",0]],"vram":[["Load","Memory","load/1",92.6239],["Data","Memory Used","data/2",34.3808],["Data","Memory Available","data/3",2.7379]],"ram":[["Data","Memory Used","data/0",23.1137],["Load","Memory","load/0",74.2888],["Data","Memory Available","data/1",7.9996]],"dimm1":[["Temperature","DIMM #1","temperature/0",35],["Temperature","Temperature Sensor Resolution","temperature/1",0.25],["Temperature","Thermal Sensor Low Limit","temperature/2",0],["Temperature","Thermal Sensor High Limit","temperature/3",55],["Temperature","Thermal Sensor Critical Low Limit","temperature/4",0],["Temperature","Thermal Sensor Critical High Limit","temperature/5",85],["Timing","tCKAVGmin (Minimum Cycle Time)","timing/20",0.416],["Timing","tCKAVGmax (Maximum Cycle Time)","timing/21",1.01],["Timing","tAA (CAS Latency Time)","timing/22",16.666],["Timing","tRCD (RAS to CAS Delay Time)","timing/23",16.666],["Timing","tRP (Row Precharge Delay Time)","timing/24",16.666],["Timing","tRAS (Active to Precharge Delay Time)","timing/25",32],["Timing","tRC (Active to Active/Refresh Delay Time)","timing/26",48.666],["Timing","tWR (Write Recovery Time)","timing/27",30],["Timing","tRFC1 (Normal Refresh Recovery Time)","timing/28",295],["Timing","tRFC2 (Fine Granularity Refresh Recovery Time)","timing/29",160],["Timing","tRFCsb (Same Bank Refresh Recovery Time)","timing/30",130],["Timing","tRFC1_dlr (Normal Refresh Recovery Time 3DS)","timing/31",0],["Timing","tRFC2_dlr (Fine Granularity Refresh Recovery Time 3DS)","timing/32",0],["Timing","tRFCsb_dlr (Same Bank Refresh Recovery Time 3DS)","timing/33",0],["Data","Capacity","data/50",16]],"dimm3":[["Temperature","DIMM #3","temperature/0",33.5],["Temperature","Temperature Sensor Resolution","temperature/1",0.25],["Temperature","Thermal Sensor Low Limit","temperature/2",0],["Temperature","Thermal Sensor High Limit","temperature/3",55],["Temperature","Thermal Sensor Critical Low Limit","temperature/4",0],["Temperature","Thermal Sensor Critical High Limit","temperature/5",85],["Timing","tCKAVGmin (Minimum Cycle Time)","timing/20",0.416],["Timing","tCKAVGmax (Maximum Cycle Time)","timing/21",1.01],["Timing","tAA (CAS Latency Time)","timing/22",16.666],["Timing","tRCD (RAS to CAS Delay Time)","timing/23",16.666],["Timing","tRP (Row Precharge Delay Time)","timing/24",16.666],["Timing","tRAS (Active to Precharge Delay Time)","timing/25",32],["Timing","tRC (Active to Active/Refresh Delay Time)","timing/26",48.666],["Timing","tWR (Write Recovery Time)","timing/27",30],["Timing","tRFC1 (Normal Refresh Recovery Time)","timing/28",295],["Timing","tRFC2 (Fine Granularity Refresh Recovery Time)","timing/29",160],["Timing","tRFCsb (Same Bank Refresh Recovery Time)","timing/30",130],["Timing","tRFC1_dlr (Normal Refresh Recovery Time 3DS)","timing/31",0],["Timing","tRFC2_dlr (Fine Granularity Refresh Recovery Time 3DS)","timing/32",0],["Timing","tRFCsb_dlr (Same Bank Refresh Recovery Time 3DS)","timing/33",0],["Data","Capacity","data/50",16]],"disk":[["Temperature","Composite Temperature","temperature/0",31],["Temperature","Temperature #1","temperature/1",30.85],["Temperature","Temperature #2","temperature/2",68.85],["Temperature","Warning Temperature","temperature/10",74],["Temperature","Critical Temperature","temperature/11",79],["Level","Life","level/20",97],["Data","Data Read","data/21",8989],["Data","Data Written","data/22",11051],["Factor","Power On Count","factor/23",161],["Factor","Power On Hours","factor/24",1538],["Load","Used Space","load/30",28.136],["Data","Free Space","data/31",718.787],["Data","Total Space","data/32",1000.2],["Load","Read Activity","load/51",0],["Load","Write Activity","load/52",0.302206],["Load","Total Activity","load/53",0.330632],["Throughput","Read Rate","throughput/54",0],["Throughput","Write Rate","throughput/55",419652],["Level","Available Spare","level/100",100],["Level","Available Spare Threshold","level/101",10],["Level","Percentage Used","level/102",3]],"sio":[["Control","Fan #1","control/0",null],["Voltage","Voltage #1","voltage/0",1.38],["Temperature","Temperature #1","temperature/0",25],["Fan","Fan #1","fan/0",1744.19],["Control","Fan #2","control/1",null],["Voltage","Voltage #2","voltage/1",1.992],["Temperature","Temperature #2","temperature/1",39],["Fan","Fan #2","fan/1",0],["Control","Fan #3","control/2",null],["Voltage","Voltage #3","voltage/2",2.016],["Temperature","Temperature #3","temperature/2",65],["Fan","Fan #3","fan/2",0],["Control","Fan #4","control/3",null],["Voltage","Voltage #4","voltage/3",1.992],["Temperature","Temperature #4","temperature/3",30],["Fan","Fan #4","fan/3",0],["Control","Fan #5","control/4",null],["Voltage","Voltage #5","voltage/4",1.248],["Temperature","Temperature #5","temperature/4",54],["Fan","Fan #5","fan/4",1687.5],["Control","Fan #6","control/5",null],["Voltage","Voltage #6","voltage/5",1.152],["Fan","Fan #6","fan/5",0],["Voltage","Voltage #7","voltage/6",1.404],["Voltage","+3V Standby","voltage/7",3.288],["Voltage","CMOS Battery","voltage/8",3.048]]};
+    return this._data;
+  }
+
+  renderVals() {
+    const DARK = { 'bg': '#0A0F1A', 'surface': '#0F1626', 'raised': '#1A2540', 'inset': '#0A0F1A', 'line': '#1E2A40', 'strong': '#2A3854', 'text': '#E6EDF7', 'sub': '#B4C3DA', 'muted': '#8B9BB4', 'accent': '#34D3C0', 'accent-fill': '#34D3C0', 'on-accent': '#04201C', 'info-bg': '#11233A', 'info-line': '#22476B', 'info-text': '#B4C3DA', 'info-icon': '#7CC4FF', 'info-fill': '#7CC4FF', 'on-info': '#061A2E', 'ok-icon': '#34D3C0', 'shadow': 'rgba(0, 0, 0, 0.45)' };
+    const LIGHT = { 'bg': '#F4F7FB', 'surface': '#FFFFFF', 'raised': '#E3ECF7', 'inset': '#F4F7FB', 'line': '#DCE3EE', 'strong': '#C3CEDD', 'text': '#0E1626', 'sub': '#33415A', 'muted': '#4F5E75', 'accent': '#0B8577', 'accent-fill': '#0B8577', 'on-accent': '#FFFFFF', 'info-bg': '#EAF3FF', 'info-line': '#B5D2F5', 'info-text': '#33415A', 'info-icon': '#1C5FA8', 'info-fill': '#1C5FA8', 'on-info': '#FFFFFF', 'ok-icon': '#0B8577', 'shadow': 'rgba(14, 22, 38, 0.18)' };
+    const VIEWS = {
+      cpu: { crumb: 'AMD Ryzen 9 9900X', names: ['AMD Ryzen 9 9900X'], sections: [{ key: 'cpu', hw: '/amdcpu/0' }] },
+      cpuReduced: { crumb: 'AMD Ryzen 9 9900X', names: ['AMD Ryzen 9 9900X'], sections: [{ key: 'cpuReduced', hw: '/amdcpu/0' }], reduced: true },
+      gpu: { crumb: 'NVIDIA GeForce RTX 5060 Ti', names: ['NVIDIA GeForce RTX 5060 Ti'], sections: [{ key: 'gpu', hw: '/gpu-nvidia/0' }] },
+      memory: { crumb: 'Memory', names: ['Virtual Memory', 'Total Memory', 'Corsair - CMK32GX5M2B6000C38 (#1)', 'Corsair - CMK32GX5M2B6000C38 (#3)'], sections: [
+        { key: 'vram', hw: '/vram', heading: 'Virtual Memory' }, { key: 'ram', hw: '/ram', heading: 'Total Memory' },
+        { key: 'dimm1', hw: '/memory/dimm/1', heading: 'Corsair - CMK32GX5M2B6000C38 (#1)' }, { key: 'dimm3', hw: '/memory/dimm/3', heading: 'Corsair - CMK32GX5M2B6000C38 (#3)' }] },
+      disk: { crumb: 'KINGSTON SNV3S1000G', names: ['KINGSTON SNV3S1000G'], sections: [{ key: 'disk', hw: '/nvme/0' }] },
+      motherboard: { crumb: 'Motherboard', names: ['Gigabyte B850 EAGLE WIFI6E', 'ITE IT8696E'], sections: [{ key: 'sio', hw: '/lpc/it8696e/0' }] }
+    };
+    const ORDER = ['Fan', 'Temperature', 'Voltage', 'Clock', 'Load', 'Power', 'Current', 'Data', 'SmallData', 'Throughput', 'Level', 'Factor', 'Timing', 'Control'];
+    const LABELS = { Fan: 'Fans', Temperature: 'Temperatures', Voltage: 'Voltages', Clock: 'Clocks', Load: 'Loads', Power: 'Power', Current: 'Currents', Data: 'Data', SmallData: 'Small data', Throughput: 'Throughput', Level: 'Levels', Factor: 'Factors', Timing: 'Timings', Control: 'Controls' };
+    const rank = (type) => { const i = ORDER.indexOf(type); return i === -1 ? ORDER.length : i; };
+
+    const nf = (v, d) => {
+      const t = new Intl.NumberFormat('en-US', { minimumFractionDigits: d, maximumFractionDigits: d }).format(v);
+      return /^-0(\.0+)?$/.test(t) ? t.slice(1) : t;
+    };
+    const fmt = (type, v) => {
+      if (v === null || !Number.isFinite(v)) return { value: '—', unit: '' };
+      switch (type) {
+        case 'Temperature': return { value: nf(v, 1), unit: '°C' };
+        case 'Load': case 'Control': case 'Level': return { value: nf(v, 1), unit: '%' };
+        case 'Clock': return { value: nf(v, 0), unit: 'MHz' };
+        case 'Power': return { value: nf(v, 1), unit: 'W' };
+        case 'Voltage': return { value: nf(v, 3), unit: 'V' };
+        case 'Current': return { value: nf(v, 2), unit: 'A' };
+        case 'Fan': return { value: nf(v, 0), unit: 'RPM' };
+        case 'Data': return { value: nf(v, 1), unit: 'GB' };
+        case 'SmallData': return { value: nf(v, 0), unit: 'MB' };
+        case 'Throughput': return { value: nf(v / 1e6, 1), unit: 'MB/s' };
+        case 'Timing': return { value: nf(v, 3), unit: 'ns' };
+        default: return { value: nf(v, 2), unit: '' };
+      }
+    };
+    const text = (p) => (p.unit === '' ? p.value : p.value + ' ' + p.unit);
+
+    // An illustrative 10-minute history that ends at the current value.
+    const history = (key, type, v) => {
+      if (v === null) return null;
+      let seed = 7;
+      for (let i = 0; i < key.length; i++) seed = (seed * 31 + key.charCodeAt(i)) % 2147483647;
+      const r = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+      const amp = v === 0 ? 0 : Math.max(Math.abs(v) * 0.05, type === 'Load' ? 2 : 0.01);
+      const pts = []; let x = 0;
+      for (let i = 0; i < 120; i++) { x += (r() - 0.5) * amp; if (r() < 0.04) x += (r() - 0.5) * amp * 5; pts.push(x); }
+      const shift = v - pts[pts.length - 1];
+      const vals = pts.map((p) => Math.max(0, type === 'Load' ? Math.min(100, p + shift) : p + shift));
+      vals[vals.length - 1] = v;
+      let lo = Math.min(...vals); let hi = Math.max(...vals);
+      const min = lo; const max = hi;
+      if (hi === lo) { hi = lo + 1; } else { const pad = (hi - lo) * 0.1; lo -= pad; hi += pad; }
+      let line = '';
+      vals.forEach((val, i) => { line += (i ? 'L' : 'M') + (i * 600 / 119).toFixed(1) + ' ' + (160 - ((val - lo) / (hi - lo)) * 160).toFixed(1); });
+      return { line, area: line + 'L600 160L0 160Z', min, max };
+    };
+
+    const viewId = VIEWS[this.props.view] ? this.props.view : 'cpu';
+    const V = VIEWS[viewId];
+    const reduced = V.reduced === true;
+    const theme = this.state.theme ?? this.props.theme ?? 'dark';
+    const T = theme === 'light' ? LIGHT : DARK;
+    const rename = this.props.rename === true || this.props.rename === 'true';
+    const D = this.data();
+    const { names, draft } = this.state;
+    const typesOf = (list) => [...new Set(list.map((s) => s[0]))].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
+    // Drawer: nothing selected on open. Chart on top: the first unlocked sensor is selected on open, as today.
+    const top = this.props.detail === 'top';
+    let firstKey = null;
+    if (top) {
+      for (const section of V.sections) {
+        const list = D[section.key];
+        const type = typesOf(list).find((t) => !(reduced && t !== 'Load'));
+        if (type) { firstKey = section.hw + '/' + list.find((s) => s[0] === type)[2]; break; }
+      }
+    }
+    const fromProp = this.props.open ? V.sections[0].hw + '/' + this.props.open : null;
+    const selectedKey = this.state.selected === undefined ? (fromProp ?? firstKey) : this.state.selected;
+
+    let sel = null;
+    let total = 0;
+    const sections = V.sections.map((section) => {
+      const list = D[section.key];
+      total += list.length;
+      const types = typesOf(list);
+      const groups = types.map((type) => {
+        const sensors = list.filter((s) => s[0] === type);
+        const locked = reduced && type !== 'Load';
+        const label = LABELS[type] ?? type + 's';
+        const rows = locked ? [] : sensors.map(([, defaultName, suffix, value]) => {
+          const key = section.hw + '/' + suffix;
+          const name = names[key] ?? defaultName;
+          const on = key === selectedKey;
+          const now = fmt(type, value);
+          if (on) {
+            const h = history(key, type, value);
+            sel = {
+              key, defaultName, name, group: label, id: key, value: now.value, unit: now.unit,
+              chartLabel: name + ' over the last 10 minutes',
+              line: h ? h.line : '', area: h ? h.area : '',
+              min: h ? text(fmt(type, h.min)) : '—', max: h ? text(fmt(type, h.max)) : '—',
+              unitText: fmt(type, 0).unit || '—'
+            };
+          }
+          return {
+            name, defaultName, renamed: name !== defaultName, now: text(now),
+            on: on ? 'true' : 'false',
+            bg: on ? 'var(--raised)' : 'transparent', border: on ? 'var(--accent)' : 'transparent',
+            valColor: value === null || (type === 'Fan' && value === 0) ? 'var(--muted)' : 'var(--text)',
+            pick: () => this.setState({ selected: key, draft: names[key] ?? '' })
+          };
+        });
+        return { label, count: sensors.length, locked, lockLabel: 'Needs full sensors', breakInside: locked || sensors.length <= 8 ? 'avoid' : 'auto', rows };
+      });
+      return { hasHeading: V.sections.length > 1, heading: section.heading ?? '', groups };
+    });
+
+    const title = viewId === 'memory' ? 'Memory sensors' : viewId === 'motherboard' ? 'Motherboard sensors' : V.crumb + ' sensors';
+    return {
+      vars: Object.entries(T).map(([k, v]) => '--' + k + ': ' + v + ';').join(' '),
+      isDark: theme === 'dark', isLight: theme === 'light',
+      themeLabel: theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme',
+      toggleTheme: () => this.setState({ theme: theme === 'dark' ? 'light' : 'dark' }),
+      helperSub: reduced ? 'Unprivileged' : 'Elevated · read-only',
+      crumb: V.crumb, title,
+      subline: [...V.names, total + ' sensors'].join(' · '),
+      reduced, sections,
+      showDrawer: sel !== null && !top, showTop: sel !== null && top,
+      topPosition: this.props.stickyChart === false || this.props.stickyChart === 'false' ? 'static' : 'sticky',
+      sel: sel ?? {},
+      close: () => this.setState({ selected: null }),
+      rename, draft,
+      onDraft: (e) => this.setState({ draft: e.target.value }),
+      save: () => { if (!sel) return; const v = draft.trim(); const n = { ...names }; if (v && v !== sel.defaultName) n[sel.key] = v; else delete n[sel.key]; this.setState({ names: n }); },
+      reset: () => { if (!sel) return; const n = { ...names }; delete n[sel.key]; this.setState({ names: n, draft: '' }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

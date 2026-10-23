@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pophood · Final · Motherboard sensors</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+.th.dark{--bg:#0A0F1A;--surface:#0F1626;--raised:#1A2540;--inset:#0A0F1A;--line:#1E2A40;--strong:#2A3854;--text:#E6EDF7;--sub:#B4C3DA;--muted:#8B9BB4;--accent:#34D3C0;--accent-fill:#34D3C0;--on-accent:#04201C;--ok-icon:#34D3C0}
+.th.light{--bg:#F4F7FB;--surface:#FFFFFF;--raised:#E3ECF7;--inset:#F4F7FB;--line:#DCE3EE;--strong:#C3CEDD;--text:#0E1626;--sub:#33415A;--muted:#4F5E75;--accent:#0B8577;--accent-fill:#0B8577;--on-accent:#FFFFFF;--ok-icon:#0B8577}
+body{margin:0;background:#0A0F1A}
+body:has(.th.light){background:#F4F7FB}
+a{color:var(--accent)}a:hover{color:var(--text)}
+.i{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+</helmet>
+<div class="{{rootClass}}" style="min-height: 100vh; display: flex; flex-wrap: wrap; background: var(--bg); color: var(--text); font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 14px; line-height: 1.45">
+
+<nav aria-label="Main" style="flex: 1 1 200px; max-width: 100%; box-sizing: border-box; padding: 24px 16px; border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 28px">
+  <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px">
+    <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width: 26px; height: 26px; color: var(--accent)"><path d="M3 15c2-6 6-9 9-9s7 3 9 9"></path><path d="M3 15h18"></path><path d="M8 19h8"></path></svg>
+    <span style="font-size: 18px; font-weight: 600; letter-spacing: -0.01em">Pophood</span>
+    <button type="button" onClick="{{toggleTheme}}" aria-label="{{themeLabel}}" style="margin-left: auto; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 8px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer">
+      <sc-if value="{{isDark}}" hint-placeholder-val="{{ true }}"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></sc-if>
+      <sc-if value="{{isLight}}" hint-placeholder-val="{{ false }}"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"></path></svg></sc-if>
+    </button>
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 4px">
+    <a href="dashboard.dc.html" aria-current="page" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; background: var(--raised); color: var(--text); text-decoration: none; font-weight: 500">Dashboard</a>
+    <a href="runs.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 8px; color: var(--muted); text-decoration: none">Runs</a>
+  </div>
+  <div style="margin-top: auto; display: flex; flex-direction: column; gap: 12px; padding: 14px 12px; border: 1px solid var(--line); border-radius: 10px; font-size: 12px; color: var(--muted)">
+    <div style="display: flex; gap: 8px; align-items: flex-start">
+      <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="color: var(--ok-icon)"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+      <div><div style="color: var(--text)">Sensor helper verified</div><div>Elevated · read-only</div></div>
+    </div>
+    <div style="display: flex; gap: 8px; align-items: flex-start">
+      <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M5.6 5.6l12.8 12.8"></path></svg>
+      <div><div style="color: var(--text)">No network</div><div>Pophood makes no connections</div></div>
+    </div>
+  </div>
+</nav>
+
+<main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 28px 32px 40px; display: flex; flex-direction: column; gap: 18px">
+  <div style="font-size: 13px; color: var(--muted)"><a href="dashboard.dc.html" style="color: var(--muted)">Dashboard</a> <span aria-hidden="true">/</span> Motherboard</div>
+  <header>
+    <h1 style="margin: 0; font-size: 26px; font-weight: 600; letter-spacing: -0.01em">Motherboard sensors</h1>
+    <p style="margin: 4px 0 0; color: var(--muted)">Gigabyte B850 EAGLE WIFI6E · ITE IT8696E · 19 sensors · generic names until you rename them</p>
+  </header>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+    <section aria-label="Sensor list" style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 4px; padding: 10px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line)">
+      <sc-for list="{{groups}}" as="g" hint-placeholder-count="3">
+        <div style="padding: 10px 10px 4px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">{{g.title}} · {{g.count}}</div>
+        <sc-for list="{{g.rows}}" as="row" hint-placeholder-count="4">
+          <button type="button" onClick="{{row.pick}}" aria-pressed="{{row.on}}" style="display: flex; gap: 10px; align-items: center; min-height: 40px; padding: 0 10px; border-radius: 8px; border: 1px solid {{row.border}}; background: {{row.bg}}; color: var(--text); font: inherit; text-align: left; cursor: pointer">
+            <span style="flex: 1; min-width: 0">{{row.name}} <sc-if value="{{row.renamed}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: var(--muted)">· {{row.defaultName}}</span></sc-if></span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: {{row.valColor}}">{{row.now}}</span>
+          </button>
+        </sc-for>
+      </sc-for>
+    </section>
+
+    <section aria-label="Sensor detail" style="flex: 999 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 18px; padding: 22px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line)">
+      <div style="display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: flex-end; justify-content: space-between">
+        <div>
+          <div style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">{{sel.group}}</div>
+          <h2 style="margin: 2px 0 0; font-size: 26px; font-weight: 600">{{sel.name}}</h2>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted); margin-top: 4px">{{sel.id}}</div>
+        </div>
+        <div style="text-align: right">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 44px; font-weight: 500; line-height: 1">{{sel.now}}</div>
+          <div style="font-size: 12px; color: var(--muted); margin-top: 6px">now · refreshes every second</div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <svg viewBox="0 0 600 160" preserveAspectRatio="none" role="img" aria-label="{{sel.name}} over the last 10 minutes" style="display: block; width: 100%; height: 200px"><path d="M0 0H600M0 80H600M0 160H600" style="stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke"></path><path d="{{sel.area}}" style="fill: var(--accent); fill-opacity: 0.1; stroke: none"></path><path d="{{sel.line}}" style="fill: none; stroke: var(--accent); stroke-width: 2; vector-effect: non-scaling-stroke"></path></svg>
+        <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted)"><span>−10 min</span><span>now</span></div>
+      </div>
+
+      <dl style="margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+        <div style="padding: 12px 14px; border-radius: 10px; background: var(--inset)"><dt style="font-size: 12px; color: var(--muted)">Min (10 min)</dt><dd style="margin: 4px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 18px">{{sel.min}}</dd></div>
+        <div style="padding: 12px 14px; border-radius: 10px; background: var(--inset)"><dt style="font-size: 12px; color: var(--muted)">Max (10 min)</dt><dd style="margin: 4px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 18px">{{sel.max}}</dd></div>
+        <div style="padding: 12px 14px; border-radius: 10px; background: var(--inset)"><dt style="font-size: 12px; color: var(--muted)">Unit</dt><dd style="margin: 4px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 18px">{{sel.unit}}</dd></div>
+      </dl>
+
+      <form style="display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 10px; border: 1px solid var(--strong)">
+        <label for="rename" style="font-weight: 600">Display name</label>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <input id="rename" type="text" value="{{draft}}" onChange="{{onDraft}}" placeholder="{{sel.defaultName}}" style="flex: 1 1 240px; min-height: 44px; box-sizing: border-box; padding: 0 12px; border-radius: 8px; border: 1px solid var(--strong); background: var(--inset); color: var(--text); font: inherit; font-size: 15px">
+          <button type="button" onClick="{{save}}" style="min-height: 44px; padding: 0 18px; border-radius: 8px; border: 0; background: var(--accent-fill); color: var(--on-accent); font: inherit; font-weight: 600; cursor: pointer">Save name</button>
+          <button type="button" onClick="{{reset}}" style="min-height: 44px; padding: 0 14px; border-radius: 8px; border: 1px solid var(--strong); background: transparent; color: var(--text); font: inherit; cursor: pointer">Reset to “{{sel.defaultName}}”</button>
+        </div>
+        <p style="margin: 0; font-size: 12px; color: var(--muted)">Shows on the dashboard, in this list and in run traces. Saved on this PC only.</p>
+      </form>
+    </section>
+  </div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"$preview":{"width":1280,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { names: { 'fan/0': 'CPU fan' }, selected: 'fan/1', draft: 'Rear exhaust', theme: null };
+  }
+  componentDidUpdate(prev) {
+    if (prev.theme !== this.props.theme && this.state.theme !== null) this.setState({ theme: null });
+  }
+  renderVals() {
+    const theme = this.state.theme ?? this.props.theme ?? 'dark';
+    const rnd = (seed) => { let s = seed; return () => { s = (s * 16807) % 2147483647; return s / 2147483647; }; };
+    const chart = (seed, flat) => {
+      const r = rnd(seed); let v = 80; let d = '';
+      for (let i = 0; i < 120; i++) {
+        if (!flat) { v += (r() - 0.5) * 16; if (r() < 0.04) v += (r() - 0.5) * 50; v = Math.max(16, Math.min(144, v)); }
+        d += (i ? 'L' : 'M') + (i * 600 / 119).toFixed(1) + ' ' + (flat ? 156 : v).toFixed(1);
+      }
+      return { line: d, area: d + 'L600 160L0 160Z' };
+    };
+    const base = '/lpc/it8696e/0/';
+    const defs = [
+      { title: 'Fans', unit: 'RPM', rows: [
+        ['fan/0', 'Fan #1', '1,142', '1,088', '1,690'], ['fan/1', 'Fan #2', '864', '812', '1,204'],
+        ['fan/2', 'Fan #3', '0', '0', '0', true], ['fan/3', 'Fan #4', '0', '0', '0', true], ['fan/4', 'Fan #5', '0', '0', '0', true] ] },
+      { title: 'Temperatures', unit: '°C', rows: [
+        ['temperature/0', 'Temperature #1', '38.0', '36.5', '41.0'], ['temperature/1', 'Temperature #2', '45.0', '43.0', '52.0'],
+        ['temperature/2', 'Temperature #3', '31.0', '30.0', '33.0'], ['temperature/3', 'Temperature #4', '52.0', '49.0', '61.0'],
+        ['temperature/4', 'Temperature #5', '29.0', '28.5', '30.0'] ] },
+      { title: 'Voltages', unit: 'V', rows: [
+        ['voltage/0', 'Voltage #1', '1.244', '1.012', '1.296'], ['voltage/1', 'Voltage #2', '1.008', '1.004', '1.012'],
+        ['voltage/2', 'Voltage #3', '3.312', '3.300', '3.324'], ['voltage/3', 'Voltage #4', '5.040', '5.010', '5.070'],
+        ['voltage/4', 'Voltage #5', '12.096', '12.024', '12.168'], ['voltage/5', 'Voltage #6', '1.104', '1.100', '1.108'],
+        ['voltage/6', 'Voltage #7', '0.912', '0.900', '0.920'], ['voltage/7', 'Voltage #8', '1.800', '1.796', '1.804'],
+        ['voltage/8', 'Voltage #9', '3.360', '3.348', '3.372'] ] }
+    ];
+    const { names, selected, draft } = this.state;
+    let sel = null; let seed = 13;
+    const groups = defs.map((g) => ({
+      title: g.title, count: g.rows.length,
+      rows: g.rows.map(([key, defaultName, now, min, max, flat]) => {
+        seed += 19;
+        const name = names[key] ?? defaultName;
+        const on = selected === key;
+        if (on) sel = { key, group: g.title, name, defaultName, id: base + key, now: now + ' ' + g.unit, min: min + ' ' + g.unit, max: max + ' ' + g.unit, unit: g.unit, ...chart(seed, flat) };
+        return {
+          name, defaultName, renamed: name !== defaultName, now: now + ' ' + g.unit,
+          on: on ? 'true' : 'false',
+          bg: on ? 'var(--raised)' : 'transparent', border: on ? 'var(--accent)' : 'transparent',
+          valColor: flat ? 'var(--muted)' : 'var(--text)',
+          pick: () => this.setState({ selected: key, draft: names[key] ?? '' })
+        };
+      })
+    }));
+    return {
+      rootClass: 'th ' + theme,
+      isDark: theme === 'dark', isLight: theme === 'light',
+      themeLabel: theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme',
+      toggleTheme: () => this.setState({ theme: theme === 'dark' ? 'light' : 'dark' }),
+      groups, sel, draft,
+      onDraft: (e) => this.setState({ draft: e.target.value }),
+      save: () => { const v = draft.trim(); const n = { ...names }; if (v && v !== sel.defaultName) n[sel.key] = v; else delete n[sel.key]; this.setState({ names: n }); },
+      reset: () => { const n = { ...names }; delete n[sel.key]; this.setState({ names: n, draft: '' }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

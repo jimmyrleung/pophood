@@ -1,0 +1,11 @@
+node_modules/
+dist/
+src-tauri/target/
+src-tauri/gen/
+src-tauri/binaries/
+helper/bin/
+helper/obj/
+helper.Tests/bin/
+helper.Tests/obj/
+audit-out/
+sessions/

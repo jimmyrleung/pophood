@@ -1,0 +1,35 @@
+{
+  "kind": "frame",
+  "frame": {
+    "seq": 7,
+    "t": 1761040800123,
+    "periodMs": 1000,
+    "elevated": false,
+    "memory": [
+      { "locator": "DIMM 1", "sizeGB": 16.0, "type": "DDR5", "configuredMTs": 6000 }
+    ],
+    "hardware": [
+      { "id": "/amdcpu/0", "name": "AMD Ryzen 9 9900X", "type": "Cpu", "parent": null }
+    ],
+    "sensors": [
+      {
+        "id": "/amdcpu/0/temperature/2",
+        "hw": "/amdcpu/0",
+        "name": "Core (Tctl/Tdie)",
+        "type": "Temperature",
+        "index": 2,
+        "value": null,
+        "key": "/amdcpu/0/temperature/2|Core (Tctl/Tdie)"
+      },
+      {
+        "id": "/amdcpu/0/load/0",
+        "hw": "/amdcpu/0",
+        "name": "CPU Total",
+        "type": "Load",
+        "index": 0,
+        "value": 12.3,
+        "key": "/amdcpu/0/load/0|CPU Total"
+      }
+    ]
+  }
+}
