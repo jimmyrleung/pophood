@@ -2,7 +2,7 @@
 
 Pop the hood on your PC. Pophood is an all-in-one Windows hardware monitor and benchmark app (CPU, memory, disk, GPU) with a modern, curated dashboard and a small, read-only, auditable sensor helper. Only the helper ever runs as admin.
 
-Status: v0.1.1, live dashboard with the new sensor drill-down (see [specs/v0.1.1/techspec.md](specs/v0.1.1/techspec.md)). Specs for every version: [specs/](specs/).
+Status: v0.2.0, live dashboard and sensor drill-down; rename any sensor (see [specs/v0.2.0/techspec.md](specs/v0.2.0/techspec.md)). Specs for every version: [specs/](specs/).
 
 - [Grill session](specs/v0.1.0/grill-session/session.md): what we agreed and why
 - [Spike results](specs/v0.1.0/spike-results.md): what was verified on real hardware

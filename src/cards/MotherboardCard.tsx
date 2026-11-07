@@ -1,3 +1,4 @@
+import { useLabels } from "../sensors/labels";
 import { Card, NotReported } from "./CardParts";
 import type { CardModel } from "./fields";
 
@@ -9,13 +10,14 @@ interface Props {
 /** A fan list with a bar per fan and no sparkline (the chosen mockup draws none; the history is in the drill-down). */
 export function MotherboardCard({ card, onOpen }: Props) {
   const fans = card.fans;
+  const { map } = useLabels();
   return (
-    <Card card={card} onOpen={onOpen}>
+    <Card card={card} onOpen={onOpen} linkText="Name your fans">
       <div className="fans">
         {fans?.rows.map((row) => (
           <div className="fan" key={row.key}>
             <div className="fan__top">
-              <span>{row.name}</span>
+              <span className="fan__name">{map.get(row.key) ?? row.name}</span>
               {row.cell.kind === "value" ? (
                 <span className="fan__value">
                   {row.cell.value}

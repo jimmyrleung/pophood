@@ -141,7 +141,7 @@ There is no current flow (greenfield). Expected flows, at the level of behaviour
 3. **Live use:**
    - Each card shows sparklines from an in-memory history of the last ~10 minutes.
    - A card click opens the full sensor list for that component.
-   - Any sensor can be renamed there. The label then shows everywhere: cards, the full list and traces.
+   - Any sensor can be renamed there. The label then shows in the full list, on the Motherboard card's fan rows and (from v0.3.0) in traces; fixed card labels keep their names ([v0.2.0 requirements](../v0.2.0/requirements.md), Q&A #2).
 4. **Benchmark (single test or "Run all"):**
    - A pre-run check warns about background load, and about reduced sensors if not elevated, but doesn't block.
    - Sampling switches to 250 ms for the duration of the run.
@@ -246,7 +246,7 @@ Delivery is a sequence of vertical slices. Each one is user-observable and build
 
 | # | Slice goal ("the owner can…") | Notes |
 |---|---|---|
-| 2 | …rename any sensor in the full list, and see the label on the cards and in the full list. Renames persist per machine across restarts. | Includes "reset to the default name". The key follows RF13. OQ1 is resolved: identifiers were stable across a reboot. |
+| 2 | …rename any sensor in the full list, and see the label on the Motherboard card's fan rows and in the full list. Renames persist per machine across restarts. | Includes "reset to the default name". The key follows RF13. OQ1 is resolved: identifiers were stable across a reboot. |
 | 3 | …run the CPU benchmark and see the multi-thread and single-thread 7-Zip ratings, saved as a run with a 250 ms sensor trace, in a basic run list. | This slice introduces SQLite persistence, tool hash verification, the reduced-sensors warning, and cancel. |
 | 4 | …run the memory benchmark (bandwidth for read, write and copy, plus latency). | Must follow the STREAM sizing rules (≥ 4× LLC; the owner's 9900X has 2 × 32 MB L3). Results that don't conform to STREAM are labeled. "Run all" uses the quick variant; running it alone gives the full one (answer #31). Budget ≤ 30 s. |
 | 5 | …run the GPU benchmark on a chosen adapter (defaulting to the discrete GPU) and see FP32 throughput and VRAM bandwidth. | Adapter picker. Budget ≤ 10 s (P3 measured ~1.5 s). |
@@ -262,7 +262,7 @@ Each slice ships as its own minor version and gets its own techspec (answer #37)
 |---|---|---|
 | v0.1.0 | 1: live dashboard, full sensors, trust baseline | [techspec](techspec.md) |
 | v0.1.1 | Patch: drill-down layout (group cards in columns, chart on top), reduced-mode copy on the drill-down | [scope stub](../v0.1.1/README.md), [UI proposal](../v0.1.1/ui-proposal/ui-proposal.md), [techspec](../v0.1.1/techspec.md) |
-| v0.2.0 | 2: rename any sensor | [scope stub](../v0.2.0/README.md); techspec to write |
+| v0.2.0 | 2: rename any sensor | [scope stub](../v0.2.0/README.md), [requirements](../v0.2.0/requirements.md), [techspec](../v0.2.0/techspec.md), [tasks](../v0.2.0/tasks.md) |
 | v0.3.0 | 3: CPU benchmark, SQLite, basic run list | [scope stub](../v0.3.0/README.md); techspec to write |
 | v0.4.0 | 4: memory benchmark | [scope stub](../v0.4.0/README.md); techspec to write |
 | v0.5.0 | 5: GPU benchmark | [scope stub](../v0.5.0/README.md); techspec to write |

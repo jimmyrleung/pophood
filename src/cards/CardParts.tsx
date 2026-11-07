@@ -95,6 +95,7 @@ export function Fields({ fields }: { fields: FieldModel[] }) {
 interface CardProps {
   card: CardModel;
   onOpen: (cardId: string) => void;
+  linkText?: string;
   children: ReactNode;
 }
 
@@ -102,7 +103,7 @@ interface CardProps {
  * A card. The whole card opens the drill-down when clicked; "All sensors" is the keyboard target (the article itself
  * isn't focusable, so Tab doesn't stop twice).
  */
-export function Card({ card, onOpen, children }: CardProps) {
+export function Card({ card, onOpen, linkText = "All sensors", children }: CardProps) {
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions
     <article className="card card--clickable" onClick={() => onOpen(card.id)}>
@@ -119,7 +120,7 @@ export function Card({ card, onOpen, children }: CardProps) {
             onOpen(card.id);
           }}
         >
-          All sensors
+          {linkText}
         </button>
       </header>
       {children}

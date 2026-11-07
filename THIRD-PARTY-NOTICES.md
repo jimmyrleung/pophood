@@ -1,6 +1,6 @@
 # Third-party notices
 
-Pophood 0.1.1 is built from source and bundles the components below. Versions are the ones in `helper/packages.lock.json`, `src-tauri/Cargo.lock` and `package-lock.json`. This file lists each bundled component with its version, licence, copyright and source location. The full licence texts are in each project's source tree (and, for LibreHardwareMonitor and the PawnIO modules, in `third_party/LibreHardwareMonitor/LICENSE` and `third_party/LibreHardwareMonitor/THIRD-PARTY-NOTICES.txt`). A generated notice list for every transitive Rust and npm package, with the full texts bundled in the installer, is due before a public release.
+Pophood 0.2.0 is built from source and bundles the components below. Versions are the ones in `helper/packages.lock.json`, `src-tauri/Cargo.lock` and `package-lock.json`. This file lists each bundled component with its version, licence, copyright and source location. The full licence texts are in each project's source tree (and, for LibreHardwareMonitor and the PawnIO modules, in `third_party/LibreHardwareMonitor/LICENSE` and `third_party/LibreHardwareMonitor/THIRD-PARTY-NOTICES.txt`). A generated notice list for every transitive Rust and npm package, with the full texts bundled in the installer, is due before a public release.
 
 Pophood itself is released under the MIT licence (see `LICENSE`).
 

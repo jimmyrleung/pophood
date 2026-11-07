@@ -1,6 +1,6 @@
 [package]
 name = "pophood"
-version = "0.1.1"
+version = "0.2.0"
 description = "Pophood: a read-only hardware monitor and benchmark for Windows"
 edition = "2024"
 license = "MIT"

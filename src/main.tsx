@@ -9,11 +9,13 @@ import "./styles/app.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
+import { labelStore } from "./sensors/labels";
 import { applyTheme, watchSystemTheme } from "./theme/theme";
 
 // Before the first render, so the page never paints in the wrong theme.
 applyTheme();
 watchSystemTheme();
+void labelStore.start();
 
 createRoot(document.getElementById("root") as HTMLElement).render(
   <StrictMode>

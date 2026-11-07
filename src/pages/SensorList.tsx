@@ -2,6 +2,7 @@ import { useState } from "react";
 import { DetailChart } from "../charts/LineChart";
 import { formatParts, formatSensor, NOT_REPORTED } from "../cards/format";
 import { componentName, componentScope, drillSections, groupLabel, cleanName } from "../cards/fields";
+import { MAX_LABEL_LENGTH, useLabels, useLabelStore } from "../sensors/labels";
 import type { UiFrame, UiSensor } from "../sensors/protocol";
 import { useFrame, useSensorStatus, useSeriesList } from "../sensors/store";
 import { LockedValue } from "../cards/CardParts";
@@ -28,7 +29,72 @@ function Breadcrumb({ name, onBack }: { name: string; onBack: () => void }) {
   );
 }
 
-function SensorDetail({ sensor, frame, stale }: { sensor: UiSensor; frame: UiFrame; stale: boolean }) {
+function RenameForm({ sensor, label }: { sensor: UiSensor; label: string | undefined }) {
+  const store = useLabelStore();
+  const { loadError } = useLabels();
+  const [draft, setDraft] = useState(label ?? "");
+  const [error, setError] = useState<string | null>(null);
+
+  async function save(text: string, verb: "saved" | "reset") {
+    try {
+      await store.save(sensor.key, text, sensor.name);
+      const trimmed = text.trim();
+      setDraft(trimmed === sensor.name ? "" : trimmed);
+      setError(null);
+    } catch (reason) {
+      setError(`The name wasn't ${verb}: ${String(reason)}`);
+    }
+  }
+
+  return (
+    <form
+      className="rename"
+      onSubmit={(event) => {
+        event.preventDefault();
+        void save(draft, "saved");
+      }}
+    >
+      <label className="rename__label" htmlFor="rename-input">
+        Display name
+      </label>
+      <input
+        id="rename-input"
+        className="rename__input"
+        type="text"
+        maxLength={MAX_LABEL_LENGTH}
+        value={draft}
+        placeholder={sensor.name}
+        onChange={(event) => setDraft(event.target.value)}
+      />
+      <button type="submit" className="btn btn--accent">
+        Save name
+      </button>
+      <button type="button" className="btn btn--secondary" disabled={label === undefined} onClick={() => void save("", "reset")}>
+        Reset to “{sensor.name}”
+      </button>
+      <span className="rename__caption">Shows on the dashboard and in this list. Saved on this PC only.</span>
+      {loadError !== null && <p className="rename__error">Names saved earlier couldn't be read: {loadError}</p>}
+      {error !== null && (
+        <p className="rename__error" role="alert">
+          {error}
+        </p>
+      )}
+    </form>
+  );
+}
+
+function SensorDetail({
+  sensor,
+  label,
+  frame,
+  stale,
+}: {
+  sensor: UiSensor;
+  label: string | undefined;
+  frame: UiFrame;
+  stale: boolean;
+}) {
+  const shown = label ?? sensor.name;
   const series = useSeriesList([sensor.key])[0];
   let min: number | null = null;
   let max: number | null = null;
@@ -46,7 +112,7 @@ function SensorDetail({ sensor, frame, stale }: { sensor: UiSensor; frame: UiFra
         <div className="detail__title">
           <div className="detail__group">{groupLabel(sensor.type)}</div>
           <div className="detail__heading">
-            <h2 className="detail__name">{sensor.name}</h2>
+            <h2 className="detail__name">{shown}</h2>
             <span className="detail__id">{sensor.id}</span>
           </div>
         </div>
@@ -72,7 +138,8 @@ function SensorDetail({ sensor, frame, stale }: { sensor: UiSensor; frame: UiFra
           </div>
         </dl>
       </div>
-      <DetailChart seriesKey={sensor.key} label={`${sensor.name} over the last 10 minutes`} nowMs={frame.t} />
+      <DetailChart seriesKey={sensor.key} label={`${shown} over the last 10 minutes`} nowMs={frame.t} />
+      <RenameForm key={sensor.key} sensor={sensor} label={label} />
     </section>
   );
 }
@@ -81,6 +148,7 @@ function SensorDetail({ sensor, frame, stale }: { sensor: UiSensor; frame: UiFra
 export function SensorList({ cardId, onBack }: Props) {
   const { frame, stale } = useFrame();
   const status = useSensorStatus();
+  const labels = useLabels();
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
 
   if (frame === null) {
@@ -107,22 +175,22 @@ export function SensorList({ cardId, onBack }: Props) {
     .map((id) => frame.hardware.find((h) => h.id === id))
     .filter((h) => h !== undefined)
     .map((h) => cleanName(h.name));
+  const subline = [...hardwareNames, `${count} ${count === 1 ? "sensor" : "sensors"}`];
+  if (cardId === "motherboard") subline.push("generic names until you rename them");
 
   return (
     <>
       <Breadcrumb name={name} onBack={onBack} />
       <header>
         <h1 className="page-title">{name} sensors</h1>
-        <p className="page-sub">
-          {[...hardwareNames, `${count} ${count === 1 ? "sensor" : "sensors"}`].join(" · ")}
-        </p>
+        <p className="page-sub">{subline.join(" · ")}</p>
       </header>
 
       <StatusBanner />
 
       <div className="drill__detail">
         {selected ? (
-          <SensorDetail sensor={selected} frame={frame} stale={stale} />
+          <SensorDetail sensor={selected} label={labels.map.get(selected.key)} frame={frame} stale={stale} />
         ) : (
           <section className="detail" aria-label="Sensor detail">
             <p className="detail__caption">This component has no sensors in the current frame.</p>
@@ -162,7 +230,10 @@ export function SensorList({ cardId, onBack }: Props) {
                             aria-pressed={sensor.key === selected?.key}
                             onClick={() => setSelectedKey(sensor.key)}
                           >
-                            <span className="row__name">{sensor.name}</span>
+                            <span className="row__name">
+                              {labels.map.get(sensor.key) ?? sensor.name}
+                              {labels.map.has(sensor.key) && <span className="row__default"> · {sensor.name}</span>}
+                            </span>
                             <span className={muted ? "row__value row__value--muted" : "row__value"}>
                               {formatSensor(sensor.type, value)}
                             </span>

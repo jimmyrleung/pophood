@@ -11,6 +11,7 @@ The product is a monitor you can trust to be read-only and offline. These keep i
 **Privilege**
 - Only the sensor helper may run elevated, after one UAC prompt. `pophood.exe` never does: it shows a message box and exits with code 1 if its own token is elevated (`src-tauri/src/lib.rs`, C1).
 - The app never installs a driver. It detects PawnIO and links to https://pawnio.eu (C3).
+- The core writes one data file, `labels.json` (with `labels.json.tmp` and `labels.json.bad`), in `%LOCALAPPDATA%\dev.pophood`, at a fixed path (`src-tauri/src/labels.rs`). No command takes a path or file name from the UI.
 
 **The helper never changes hardware state** (`helper/WRITE-ALLOWLIST.md`)
 - It never calls LHM control or set APIs (`IControl.SetSoftware` / `SetDefault`, WireViewPro2 writes, `PawnIo.*` write methods, SMBus writes, HidSharp `Write` / `SetFeature`). `helper/BannedSymbols.txt` makes that a compile error (RS0030).

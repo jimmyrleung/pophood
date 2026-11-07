@@ -1,4 +1,5 @@
 mod commands;
+mod labels;
 pub mod sensors;
 pub mod webview;
 
@@ -53,6 +54,8 @@ fn refuse_if_elevated() {
 
 fn setup(app: &mut tauri::App) -> Result<(), String> {
     webview::build_main_window(app)?;
+    let data_dir = app.path().app_local_data_dir().map_err(|e| e.to_string())?;
+    app.manage(labels::LabelStore::open(&data_dir));
     // `setup` has no tokio context, so the service spawns through `tauri::async_runtime`.
     app.manage(SensorService::start(app.handle().clone()));
     Ok(())
@@ -81,6 +84,8 @@ pub fn run() {
             commands::enable_full_sensors,
             commands::retry_sensors,
             commands::open_pawnio_site,
+            commands::load_labels,
+            commands::set_label,
         ])
         .build(tauri::generate_context!())
         .unwrap_or_else(|e| fatal(&format!("Pophood could not start: {e}")));

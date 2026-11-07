@@ -209,6 +209,17 @@ button {
   color: var(--on-info);
   font-weight: 600;
 }
+.btn--accent {
+  border: 0;
+  padding: 0 18px;
+  background: var(--accent-fill);
+  color: var(--on-accent);
+  font-weight: 600;
+}
+.btn:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
 
 /* ---- Banner and panels ---- */
 
@@ -303,8 +314,8 @@ button {
     z-index: 1;
   }
   /* Keyboard focus scrolls a row out from under the panel (at most ~350 px tall) instead of hiding it (Q&A #5). */
-  html:has(.drill__detail) {
-    scroll-padding-top: 360px;
+  html:has(.drill__detail):not(:has(.rename :focus)) {
+    scroll-padding-top: 520px;
   }
 }
 .drill__list {
@@ -512,6 +523,10 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+}
+.fan__name {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .fan__value {
   font-family: "IBM Plex Mono", ui-monospace, monospace;
@@ -807,6 +822,10 @@ button {
 .row__value--muted {
   color: var(--muted);
 }
+.row__default {
+  font-size: 12px;
+  color: var(--muted);
+}
 
 .detail {
   display: flex;
@@ -869,6 +888,39 @@ button {
   margin-top: 6px;
   font-size: 12px;
   color: var(--muted);
+}
+.rename {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.rename__label {
+  font-weight: 600;
+}
+.rename__input {
+  flex: 0 1 320px;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid var(--strong);
+  background: var(--inset);
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+}
+.rename__caption {
+  font-size: 12px;
+  color: var(--muted);
+}
+.rename__error {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 12px;
+  color: var(--danger-text);
 }
 
 .stats {

@@ -7,6 +7,7 @@ use windows::Win32::UI::Shell::ShellExecuteW;
 use windows::Win32::UI::WindowsAndMessaging::SW_SHOWNORMAL;
 use windows::core::w;
 
+use crate::labels::{LabelStore, LoadedLabels};
 use crate::sensors::SensorService;
 use crate::sensors::events::SensorEvent;
 
@@ -35,4 +36,14 @@ pub fn open_pawnio_site() -> Result<(), String> {
     let result = unsafe { ShellExecuteW(None, w!("open"), w!("https://pawnio.eu"), None, None, SW_SHOWNORMAL) };
     let code = result.0 as isize;
     if code > 32 { Ok(()) } else { Err(format!("could not open the browser (code {code})")) }
+}
+
+#[tauri::command]
+pub fn load_labels(labels: State<'_, LabelStore>) -> LoadedLabels {
+    labels.load()
+}
+
+#[tauri::command]
+pub fn set_label(labels: State<'_, LabelStore>, key: String, label: Option<String>) -> Result<(), String> {
+    labels.set(key, label)
 }

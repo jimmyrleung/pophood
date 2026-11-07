@@ -1,15 +1,40 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { act, fireEvent, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import full from "../test/fixtures/frame-full.json";
 import noPawnio from "../test/fixtures/frame-elevated-no-pawnio.json";
 import reduced from "../test/fixtures/frame-reduced.json";
 import { liveElevated, liveReduced } from "../test/builders";
 import type { SensorStatus, UiFrame } from "../sensors/protocol";
+import { LabelStoreContext, createLabelStore, type LabelStore } from "../sensors/labels";
 import { SensorStoreContext, createSensorStore } from "../sensors/store";
 import { DashboardCard } from "./DashboardCard";
 import { buildDashboard, type CardModel } from "./fields";
 
-function renderCard(frame: UiFrame, status: SensorStatus, cardId: string, onOpen = vi.fn()) {
+const mocks = vi.hoisted(() => ({
+  loadLabels: vi.fn<() => Promise<{ labels: Record<string, string>; problem: string | null }>>(),
+  setLabel: vi.fn<(key: string, label: string | null) => Promise<void>>(),
+}));
+
+vi.mock("../sensors/commands", () => mocks);
+
+afterEach(() => {
+  vi.clearAllMocks();
+});
+
+async function seededLabels(labels: Record<string, string>) {
+  mocks.loadLabels.mockResolvedValueOnce({ labels, problem: null });
+  const store = createLabelStore();
+  await act(() => store.start());
+  return store;
+}
+
+function renderCard(
+  frame: UiFrame,
+  status: SensorStatus,
+  cardId: string,
+  onOpen = vi.fn(),
+  labels: LabelStore = createLabelStore(),
+) {
   const card = buildDashboard(frame, status).cards.find((c) => c.id === cardId) as CardModel;
   expect(card, `card ${cardId}`).toBeDefined();
   const store = createSensorStore();
@@ -17,7 +42,9 @@ function renderCard(frame: UiFrame, status: SensorStatus, cardId: string, onOpen
   store.applyEvent({ kind: "frame", frame });
   const view = render(
     <SensorStoreContext.Provider value={store}>
-      <DashboardCard card={card} nowMs={frame.t} onOpen={onOpen} />
+      <LabelStoreContext.Provider value={labels}>
+        <DashboardCard card={card} nowMs={frame.t} onOpen={onOpen} />
+      </LabelStoreContext.Provider>
     </SensorStoreContext.Provider>,
   );
   return { ...view, onOpen, card };
@@ -128,6 +155,31 @@ describe("cards render (UT-24)", () => {
     expect(container.textContent).toContain("1,744 RPM");
     expect(container.textContent).toContain("4 more fan headers read 0 RPM.");
     expect(container.querySelector(".card__title")?.textContent).toBe("Gigabyte B850 EAGLE WIFI6E · ITE IT8696E");
+  });
+
+  it("the Motherboard card shows a fan label in place of the LHM name, and opens from \"Name your fans\"", async () => {
+    const empty = renderCard(FULL, liveElevated(), "motherboard");
+    expect(empty.container.querySelector(".fan__name")?.textContent).toBe("Fan #1");
+    empty.unmount();
+
+    const labels = await seededLabels({ "/lpc/it8696e/0/fan/0|Fan #1": "CPU fan" });
+    const { container, onOpen } = renderCard(FULL, liveElevated(), "motherboard", vi.fn(), labels);
+    const names = [...container.querySelectorAll(".fan__name")].map((e) => e.textContent);
+    expect(names[0]).toBe("CPU fan");
+    expect(container.querySelector(".fan")?.textContent).not.toContain("Fan #1");
+    expect(screen.queryByRole("button", { name: "All sensors" })).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Name your fans" }));
+    expect(onOpen).toHaveBeenCalledTimes(1);
+    expect(onOpen).toHaveBeenLastCalledWith("motherboard");
+  });
+
+  it("the other cards keep the \"All sensors\" link", () => {
+    for (const cardId of ["gpu:/gpu-nvidia/0", "cpu:/amdcpu/0"]) {
+      const { unmount } = renderCard(FULL, liveElevated(), cardId);
+      expect(screen.getByRole("button", { name: "All sensors" })).toBeTruthy();
+      expect(screen.queryByRole("button", { name: "Name your fans" })).toBeNull();
+      unmount();
+    }
   });
 
   it("a missing value is a dash with no digits, not a 0", () => {

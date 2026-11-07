@@ -25,6 +25,7 @@ The owner runs the CPU benchmark and sees the 7-Zip multi-thread and single-thre
 - **`set_period`** is already in pipe schema v1 (v0.1.0, answer #40). `SensorService` gains a `set_period` caller. No schema change is needed.
 - **Frames carry their own `t`** and `sensor_key`, which is what the trace needs.
 - **The CPU timing precedent:** 7-Zip takes about 32 s (spike F9).
+- **Sensor labels** live in `%LOCALAPPDATA%\dev.pophood\labels.json` (`{"version": 1, "labels": {sensor_key: label}}`), written by the core's `src-tauri/src/labels.rs` (v0.2.0, ADR 0036). Traces store keys, so labels can still be applied at display time.
 
 ## Handed over from v0.1.0
 
@@ -33,7 +34,7 @@ The owner runs the CPU benchmark and sees the 7-Zip multi-thread and single-thre
 ## Open questions for this techspec
 
 - **The test-runner seam** (C8, the second of the two seams): "run, report progress, return a result".
-- **Who owns the database:** rusqlite, sqlx or tauri-plugin-sql. Plus the schema and migrations from day one (requirements "Database Changes"). The DB lives under `%LOCALAPPDATA%\dev.pophood`.
+- **Who owns the database:** rusqlite, sqlx or tauri-plugin-sql. Plus the schema and migrations from day one (requirements "Database Changes"). The DB lives under `%LOCALAPPDATA%\dev.pophood`. It also decides whether `labels.json` moves into the DB (read version 1, then retire or keep the file).
 - **The benchmark setup screen** behind "Run one test". It wasn't mocked; see the UI proposal's "Not mocked" list.
 - **Where 7-Zip lives:** `7za.exe` 26.04 as a sidecar or as a resource; its hash goes in the repo (answer #21).
 - **Recording bytes written** with each run (requirements Side effects): an option only.
